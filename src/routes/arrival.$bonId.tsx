@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { ImageViewer } from "@/components/receive/ImageViewer";
 import { Button } from "@/components/ui/button";
@@ -30,20 +30,48 @@ function ArrivalVerifyPage() {
 
   const [lines, setLines] = useState<Record<string, { qty: string; weight: string }>>({});
   const [saving, setSaving] = useState(false);
+  const prevExpectedRef = useRef<Record<string, { qty: number; weight: number | null }>>({});
+  const lastBonIdRef = useRef<string | undefined>();
+
+  const expectedFingerprint = useMemo(
+    () =>
+      bon
+        ? bon.items.map((it) => `${it.id}:${it.expectedQty}:${it.expectedWeight ?? ""}`).join("|")
+        : "",
+    [bon],
+  );
 
   useEffect(() => {
     if (!bon) return;
-    const next: Record<string, { qty: string; weight: string }> = {};
-    for (const it of bon.items) {
-      const rq = it.receivedQty ?? it.expectedQty;
-      const rw = it.receivedWeight ?? it.expectedWeight;
-      next[it.id] = {
-        qty: rq != null && rq !== 0 ? String(rq) : "",
-        weight: rw != null && rw !== 0 ? String(rw) : "",
-      };
-    }
-    setLines(next);
-  }, [bon?.id]);
+    const bonSwitched = lastBonIdRef.current !== bon.id;
+    lastBonIdRef.current = bon.id;
+    if (bonSwitched) prevExpectedRef.current = {};
+
+    setLines((prev) => {
+      const next: Record<string, { qty: string; weight: string }> = {};
+      for (const it of bon.items) {
+        const oldExp = prevExpectedRef.current[it.id];
+        const expectedChanged =
+          !oldExp ||
+          oldExp.qty !== it.expectedQty ||
+          oldExp.weight !== it.expectedWeight;
+        if (!prev[it.id] || expectedChanged || bonSwitched) {
+          const rq = it.receivedQty ?? it.expectedQty;
+          const rw = it.receivedWeight ?? it.expectedWeight;
+          next[it.id] = {
+            qty: rq != null && rq !== 0 ? String(rq) : "",
+            weight: rw != null && rw !== 0 ? String(rw) : "",
+          };
+        } else {
+          next[it.id] = prev[it.id];
+        }
+      }
+      return next;
+    });
+    prevExpectedRef.current = Object.fromEntries(
+      bon.items.map((it) => [it.id, { qty: it.expectedQty, weight: it.expectedWeight }]),
+    );
+  }, [bon?.id, expectedFingerprint]);
 
   function parseDec(raw: string): number | null {
     const t = raw.trim().replace(",", ".");

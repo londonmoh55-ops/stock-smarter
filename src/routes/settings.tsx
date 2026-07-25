@@ -1,9 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
-import { replaceState, resetToInitial, setState, useWms } from "@/lib/wms/store";
+import { getState, replaceState, resetToInitial, setState, useWms } from "@/lib/wms/store";
 import { getSettings, normalizeBusinessSettings, paymentMethodLabel } from "@/lib/wms/businessSettings";
 import { formatMergeSummary } from "@/lib/wms/mergeImport";
+import {
+  applyMergeBackup,
+  applyReplaceBackup,
+  backupFilename,
+  buildExportPayload,
+  downloadJsonBackup,
+  readBackupFile,
+  validateExportPayload,
+} from "@/lib/wms/backupPayload";
 import type { BusinessSettings, PaymentMethod } from "@/lib/wms/types";
 import { PageHeader } from "@/components/wms/ui-bits";
 import { Input } from "@/components/ui/input";
@@ -28,7 +37,10 @@ function SettingsPage() {
   const [resetConfirm, setResetConfirm] = useState(false);
   const [members, setMembers] = useState<UserProfile[]>([]);
   const [membersLoading, setMembersLoading] = useState(false);
+  const mergeFileRef = useRef<HTMLInputElement>(null);
+  const replaceFileRef = useRef<HTMLInputElement>(null);
   const isElectron = typeof window !== "undefined" && !!window.db;
+  const canMutateBackup = isElectron || isAdmin;
 
   useEffect(() => {
     void window.db?.getAppVersion().then(setVersion);
@@ -60,52 +72,90 @@ function SettingsPage() {
   }
 
   async function handleExport() {
-    if (!window.db) {
-      toast.error("Export is only available in the desktop app.");
+    if (window.db) {
+      const result = await window.db.exportBackup();
+      if (result.cancelled) return;
+      if (result.ok && result.path) {
+        toast.success(`Backup saved to ${result.path}`);
+      } else {
+        toast.error(result.error ?? "Export failed");
+      }
       return;
     }
-    const result = await window.db.exportBackup();
-    if (result.cancelled) return;
-    if (result.ok && result.path) {
-      toast.success(`Backup saved to ${result.path}`);
-    } else {
-      toast.error(result.error ?? "Export failed");
+    try {
+      downloadJsonBackup(backupFilename(), buildExportPayload(getState()));
+      toast.success("Backup downloaded");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Export failed");
     }
   }
 
   async function handleImport() {
-    if (!window.db) {
-      toast.error("Import is only available in the desktop app.");
+    if (window.db) {
+      setImportConfirm(false);
+      const result = await window.db.importBackup();
+      if (result.cancelled) return;
+      if (result.ok && result.state) {
+        replaceState(result.state);
+        toast.success("Backup imported — all data replaced.");
+      } else {
+        toast.error(result.error ?? "Import failed");
+      }
+      return;
+    }
+    if (!isAdmin) {
+      toast.error("Only an admin can replace the shared warehouse.");
       return;
     }
     setImportConfirm(false);
-    const result = await window.db.importBackup();
-    if (result.cancelled) return;
-    if (result.ok && result.state) {
-      replaceState(result.state);
-      toast.success("Backup imported — all data replaced.");
-    } else {
-      toast.error(result.error ?? "Import failed");
-    }
+    replaceFileRef.current?.click();
   }
 
   async function handleMergeImport() {
-    if (!window.db?.importMergeBackup) {
-      toast.error("Merge import is only available in the desktop app.");
+    if (window.db?.importMergeBackup) {
+      setMergeConfirm(false);
+      const result = await window.db.importMergeBackup();
+      if (result.cancelled) return;
+      if (result.ok && result.state) {
+        replaceState(result.state);
+        toast.success(
+          result.summary
+            ? `Merged: ${formatMergeSummary(result.summary)}`
+            : "Backup merged — additions only.",
+        );
+      } else {
+        toast.error(result.error ?? "Merge import failed");
+      }
+      return;
+    }
+    if (!isAdmin) {
+      toast.error("Only an admin can merge into the shared warehouse.");
       return;
     }
     setMergeConfirm(false);
-    const result = await window.db.importMergeBackup();
-    if (result.cancelled) return;
-    if (result.ok && result.state) {
-      replaceState(result.state);
-      toast.success(
-        result.summary
-          ? `Merged: ${formatMergeSummary(result.summary)}`
-          : "Backup merged — additions only.",
-      );
-    } else {
-      toast.error(result.error ?? "Merge import failed");
+    mergeFileRef.current?.click();
+  }
+
+  async function onWebBackupFile(
+    file: File | undefined,
+    mode: "merge" | "replace",
+  ) {
+    if (!file) return;
+    try {
+      const raw = await readBackupFile(file);
+      if (!validateExportPayload(raw)) {
+        throw new Error("Invalid backup file structure.");
+      }
+      if (mode === "replace") {
+        replaceState(applyReplaceBackup(raw));
+        toast.success("Backup imported — shared warehouse replaced.");
+      } else {
+        const { state: next, summary } = applyMergeBackup(getState(), raw);
+        replaceState(next);
+        toast.success(`Merged: ${formatMergeSummary(summary)}`);
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Import failed");
     }
   }
 
@@ -319,21 +369,53 @@ function SettingsPage() {
       <section className="bg-card border border-border rounded-xl p-6 shadow-sm mb-6">
         <h2 className="font-bold text-sm uppercase tracking-wider text-muted-foreground mb-4">Backup &amp; restore</h2>
         <p className="text-sm text-muted-foreground mb-4">
-          Export creates a JSON backup (schema v4). Use Merge import to add someone else&apos;s new
-          bons without wiping your cash and stock. Use Replace import only for a full restore.
-          Desktop auto-keeps the last 10 snapshots.
+          Export downloads a JSON backup (schema v4). On the web, merge and replace update the
+          shared team warehouse — only admins can run them. Merge adds new bons without wiping cash
+          and stock; replace is a full restore. Desktop also keeps the last 10 local snapshots.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Button variant="outline" onClick={handleExport} disabled={!isElectron}>
+          <Button variant="outline" onClick={handleExport}>
             Export backup
           </Button>
-          <Button variant="outline" onClick={() => setMergeConfirm(true)} disabled={!isElectron}>
+          <Button
+            variant="outline"
+            onClick={() => setMergeConfirm(true)}
+            disabled={!canMutateBackup}
+            title={!canMutateBackup ? "Admin only on web" : undefined}
+          >
             Merge import
           </Button>
-          <Button variant="outline" onClick={() => setImportConfirm(true)} disabled={!isElectron}>
+          <Button
+            variant="outline"
+            onClick={() => setImportConfirm(true)}
+            disabled={!canMutateBackup}
+            title={!canMutateBackup ? "Admin only on web" : undefined}
+          >
             Replace import
           </Button>
         </div>
+        <input
+          ref={mergeFileRef}
+          type="file"
+          accept="application/json,.json"
+          className="hidden"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            e.target.value = "";
+            void onWebBackupFile(file, "merge");
+          }}
+        />
+        <input
+          ref={replaceFileRef}
+          type="file"
+          accept="application/json,.json"
+          className="hidden"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            e.target.value = "";
+            void onWebBackupFile(file, "replace");
+          }}
+        />
       </section>
 
       <section className="bg-card border border-destructive/30 rounded-xl p-6 shadow-sm">
@@ -356,14 +438,22 @@ function SettingsPage() {
         open={mergeConfirm}
         onOpenChange={setMergeConfirm}
         title="Merge backup?"
-        description="Adds new products, customers, transporters, and open bons. Cash, stock, ledgers, and sales stay as they are. Duplicate invoices are skipped."
+        description={
+          isElectron
+            ? "Adds new products, customers, transporters, and open bons. Cash, stock, ledgers, and sales stay as they are. Duplicate invoices are skipped."
+            : "Adds new products, customers, transporters, and open bons into the shared team warehouse. Cash, stock, ledgers, and sales stay as they are. Duplicate invoices are skipped."
+        }
         onConfirm={handleMergeImport}
       />
       <ConfirmDialog
         open={importConfirm}
         onOpenChange={setImportConfirm}
         title="Replace all data?"
-        description="This will replace ALL current data with the backup file."
+        description={
+          isElectron
+            ? "This will replace ALL current data with the backup file."
+            : "This will replace the entire shared team warehouse with the backup file."
+        }
         onConfirm={handleImport}
       />
       <ConfirmDialog

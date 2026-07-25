@@ -9,48 +9,23 @@ import path from "node:path";
 import type { WmsState } from "../src/lib/wms/types";
 import { buildSeed } from "../src/lib/wms/seed";
 import { migrateToCurrent } from "../src/lib/wms/migrate";
-import { mergeWmsState, type MergeSummary } from "../src/lib/wms/mergeImport";
+import {
+  BACKUP_APP_VERSION,
+  applyMergeBackup,
+  applyReplaceBackup,
+  buildExportPayload,
+  validateExportPayload,
+  type ExportPayload,
+  type MergeSummary,
+} from "../src/lib/wms/backupPayload";
 
-export type { MergeSummary };
+export type { ExportPayload, MergeSummary };
+export { buildExportPayload, validateExportPayload };
 
 const DB_FILE = "warehouse-data.json";
 const BACKUP_COUNT = 10;
 
-export const APP_VERSION = "1.0.0";
-
-export interface BackupMetadata {
-  exportDate: string;
-  appVersion: string;
-  schemaVersion: 1 | 2 | 3 | 4;
-}
-
-export interface ExportPayload extends BackupMetadata {
-  data: WmsState;
-}
-
-const WMS_KEYS_V2 = [
-  "products",
-  "customers",
-  "transporters",
-  "cargoBons",
-  "customerStock",
-  "customerLedger",
-  "transporterLedger",
-  "cashRegisters",
-  "cashTransactions",
-  "bonExceptions",
-  "company",
-  "counters",
-] as const;
-
-const WMS_KEYS_V3 = [
-  ...WMS_KEYS_V2,
-  "preArrivalBons",
-  "arrivalVerifications",
-  "shortageHistory",
-] as const;
-
-const WMS_KEYS_V4 = [...WMS_KEYS_V3, "settings"] as const;
+export const APP_VERSION = BACKUP_APP_VERSION;
 
 function dbPath(): string {
   return path.join(app.getPath("userData"), DB_FILE);
@@ -122,47 +97,13 @@ export function readState(): WmsState {
   }
 }
 
-export function validateExportPayload(raw: unknown): raw is ExportPayload {
-  if (!raw || typeof raw !== "object") return false;
-  const o = raw as Record<string, unknown>;
-  if (o.schemaVersion !== 4 && o.schemaVersion !== 3 && o.schemaVersion !== 2 && o.schemaVersion !== 1) {
-    return false;
-  }
-  if (typeof o.exportDate !== "string") return false;
-  if (typeof o.appVersion !== "string") return false;
-  if (!o.data || typeof o.data !== "object") return false;
-  const data = o.data as Record<string, unknown>;
-  if (o.schemaVersion === 4) {
-    return WMS_KEYS_V4.every((k) => k in data);
-  }
-  if (o.schemaVersion === 3) {
-    return WMS_KEYS_V3.every((k) => k in data);
-  }
-  if (o.schemaVersion === 2) {
-    return WMS_KEYS_V2.every((k) => k in data);
-  }
-  return typeof data.products === "object" && typeof data.customers === "object";
-}
-
-export function buildExportPayload(state: WmsState): ExportPayload {
-  return {
-    schemaVersion: 4,
-    exportDate: new Date().toISOString(),
-    appVersion: APP_VERSION,
-    data: state,
-  };
-}
-
 export function importState(payload: ExportPayload): WmsState {
-  if (!validateExportPayload(payload)) {
-    throw new Error("Invalid backup file structure.");
-  }
-  // Pre-import snapshot of current data
+  const next = applyReplaceBackup(payload);
   if (fs.existsSync(dbPath())) {
     rotateBackup(fs.readFileSync(dbPath(), "utf8"));
   }
-  writeStateAtomic(migrateToCurrent(payload.data), { skipBackup: true });
-  return migrateToCurrent(payload.data);
+  writeStateAtomic(next, { skipBackup: true });
+  return next;
 }
 
 /** Keep local cash/stock/ledgers; add new master data and open bons from backup. */
@@ -170,14 +111,11 @@ export function mergeImportState(payload: ExportPayload): {
   state: WmsState;
   summary: MergeSummary;
 } {
-  if (!validateExportPayload(payload)) {
-    throw new Error("Invalid backup file structure.");
-  }
   const local = readState();
   if (fs.existsSync(dbPath())) {
     rotateBackup(fs.readFileSync(dbPath(), "utf8"));
   }
-  const { state, summary } = mergeWmsState(local, payload.data);
+  const { state, summary } = applyMergeBackup(local, payload);
   writeStateAtomic(state, { skipBackup: true });
   return { state, summary };
 }

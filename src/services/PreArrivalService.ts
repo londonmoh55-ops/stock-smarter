@@ -11,6 +11,7 @@ import { upsertCustomerStock } from "@/lib/wms/cargo-logic";
 import { getSettings } from "@/lib/wms/businessSettings";
 import { peekNextNumber } from "@/lib/wms/store";
 import { validatePhone } from "@/utils/validators";
+import { buildArrivalSnapshot } from "@/services/ArrivalService";
 
 function uid(): string {
   return crypto.randomUUID();
@@ -220,15 +221,22 @@ export function savePreArrival(
   const isVerified = existing?.status === "completed";
   const includeDeclared = getSettings(working).shortageIncludeDeclaredValue;
 
-  // Preserve received data; new lines on verified bons default to received = expected
+  // Preserve received data; if received matched prior expected (auto-filled), follow new expected.
+  // Removed items drop their received values (not present in `items`).
   const itemsWithReceived: PreArrivalItem[] = items.map((it) => {
     const prev = existing?.items.find((p) => p.id === it.id);
     if (prev) {
-      return {
-        ...it,
-        receivedQty: prev.receivedQty,
-        receivedWeight: prev.receivedWeight,
-      };
+      const receivedQty =
+        prev.receivedQty != null && prev.receivedQty === prev.expectedQty
+          ? it.expectedQty
+          : prev.receivedQty;
+      const receivedWeight =
+        it.chargeType === "weight"
+          ? prev.receivedWeight != null && prev.receivedWeight === prev.expectedWeight
+            ? it.expectedWeight
+            : prev.receivedWeight
+          : null;
+      return { ...it, receivedQty, receivedWeight };
     }
     if (isVerified) {
       return {
@@ -314,8 +322,32 @@ export function savePreArrival(
     ? working.preArrivalBons.map((b) => (b.id === bon.id ? bon : b))
     : [...working.preArrivalBons, bon];
 
+  let arrivalVerifications = working.arrivalVerifications;
+  if (isVerified && existing) {
+    arrivalVerifications = working.arrivalVerifications.map((v) => {
+      if (v.bonId !== bon.id) return v;
+      const items = itemsWithReceived.map((it) =>
+        buildArrivalSnapshot(
+          it,
+          it.receivedQty ?? 0,
+          it.chargeType === "weight" ? (it.receivedWeight ?? null) : null,
+          working.products.find((p) => p.id === it.productId)?.declaredValue ?? 0,
+          includeDeclared,
+        ),
+      );
+      return {
+        ...v,
+        invoice: bon.invoice,
+        expectedValue: bon.expectedValue,
+        receivedValue: bon.receivedValue,
+        missingValue: bon.missingValue,
+        items,
+      };
+    });
+  }
+
   return {
-    state: { ...working, counters, preArrivalBons, customerStock },
+    state: { ...working, counters, preArrivalBons, customerStock, arrivalVerifications },
     bon,
   };
 }
