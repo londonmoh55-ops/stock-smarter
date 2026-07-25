@@ -1,4 +1,4 @@
-import { ref, uploadBytes, getDownloadURL, deleteObject, refFromURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirebaseAuth, getFirebaseStorage } from "@/lib/firebase";
 
 function safeName(name: string): string {
@@ -18,14 +18,4 @@ export async function uploadWarehousePhoto(
     customMetadata: { uploadedBy: uid },
   });
   return getDownloadURL(storageRef);
-}
-
-/** Best-effort delete by download URL (ignores failures). */
-export async function tryDeleteStorageUrl(url: string | null | undefined): Promise<void> {
-  if (!url || url.startsWith("data:")) return;
-  try {
-    await deleteObject(refFromURL(getFirebaseStorage(), url));
-  } catch {
-    /* ignore — may already be gone or not a Storage URL */
-  }
 }
