@@ -1,11 +1,11 @@
 import { useEffect, type ReactNode, useState } from "react";
-import { isStoreReady, setCloudUser, waitForStore } from "./store";
+import { isStoreReady, setCloudSync, waitForStore } from "./store";
 import { useAuth } from "@/lib/auth/AuthProvider";
 
 /**
  * Hydrates warehouse state after mount:
  * - Electron → local disk via window.db
- * - Web → Firestore for the signed-in user
+ * - Web → shared Firestore warehouse for any signed-in user
  */
 export function StoreProvider({ children }: { children: ReactNode }) {
   const { user, skipAuth, loading: authLoading } = useAuth();
@@ -19,20 +19,20 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
     async function hydrate() {
       if (window.db) {
-        setCloudUser(null);
+        setCloudSync(false);
         await waitForStore();
         if (!cancelled) setReady(true);
         return;
       }
 
       if (!user) {
-        setCloudUser(null);
+        setCloudSync(false);
         if (!cancelled) setReady(false);
         return;
       }
 
       setReady(false);
-      setCloudUser(user.uid);
+      setCloudSync(true);
       await waitForStore();
       if (!cancelled) setReady(true);
     }

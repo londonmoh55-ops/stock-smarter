@@ -36,7 +36,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (r) => r.location.pathname });
   const company = useWms((s) => s.company);
   const balance = useWms((s) => currentCashBalance(s));
-  const { user, skipAuth, signOut } = useAuth();
+  const { user, skipAuth, signOut, isAdmin } = useAuth();
   const [dark, setDark] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -136,6 +136,11 @@ export function AppLayout({ children }: { children: ReactNode }) {
             </button>
             {!skipAuth && user && (
               <div className="flex items-center gap-3">
+                {isAdmin && (
+                  <span className="rounded bg-primary/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+                    Admin
+                  </span>
+                )}
                 <span className="text-xs text-muted-foreground max-w-[140px] truncate" title={user.email ?? undefined}>
                   {user.email}
                 </span>

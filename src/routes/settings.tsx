@@ -10,6 +10,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/wms/ConfirmDialog";
+import { useAuth } from "@/lib/auth/AuthProvider";
+import { listUserProfiles, type UserProfile } from "@/lib/wms/firestoreSync";
+import { ADMIN_EMAILS } from "@/lib/auth/admin";
 
 export const Route = createFileRoute("/settings")({ component: SettingsPage });
 
@@ -18,16 +21,30 @@ const METHOD_OPTIONS: PaymentMethod[] = ["cash", "ccp", "bank"];
 function SettingsPage() {
   const state = useWms((s) => s);
   const settings = getSettings(state);
+  const { isAdmin, user, skipAuth } = useAuth();
   const [version, setVersion] = useState("—");
   const [importConfirm, setImportConfirm] = useState(false);
   const [mergeConfirm, setMergeConfirm] = useState(false);
   const [resetConfirm, setResetConfirm] = useState(false);
+  const [members, setMembers] = useState<UserProfile[]>([]);
+  const [membersLoading, setMembersLoading] = useState(false);
   const isElectron = typeof window !== "undefined" && !!window.db;
 
   useEffect(() => {
     void window.db?.getAppVersion().then(setVersion);
   }, []);
 
+  useEffect(() => {
+    if (!isAdmin || skipAuth || isElectron) return;
+    setMembersLoading(true);
+    void listUserProfiles()
+      .then(setMembers)
+      .catch((err) => {
+        console.error(err);
+        toast.error("Could not load team members");
+      })
+      .finally(() => setMembersLoading(false));
+  }, [isAdmin, skipAuth, isElectron]);
   function patchSettings(patch: Partial<BusinessSettings>) {
     setState((s) => ({
       ...s,
@@ -100,8 +117,44 @@ function SettingsPage() {
 
       {!isElectron && (
         <div className="mb-6 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-foreground">
-          Cloud mode: warehouse data syncs to Firestore for your signed-in account.
+          Cloud mode: the whole team shares one warehouse in Firestore. Photos upload to Firebase Storage.
+          {isAdmin && (
+            <span className="block mt-1 text-muted-foreground">
+              Signed in as admin ({user?.email}). You can manage the team below.
+            </span>
+          )}
         </div>
+      )}
+
+      {isAdmin && !isElectron && (
+        <section className="bg-card border border-border rounded-xl p-6 shadow-sm mb-6">
+          <h2 className="font-bold text-sm uppercase tracking-wider text-muted-foreground mb-2">Admin</h2>
+          <p className="text-sm text-muted-foreground mb-4">
+            Super-admin emails: {ADMIN_EMAILS.join(", ")}. Admins can reset the shared warehouse and see every
+            signed-in account.
+          </p>
+          <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">Team</h3>
+          {membersLoading ? (
+            <p className="text-sm text-muted-foreground">Loading members…</p>
+          ) : members.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No profiles yet — users appear after they sign in once.</p>
+          ) : (
+            <ul className="divide-y divide-border rounded-md border border-border text-sm">
+              {members.map((m) => (
+                <li key={m.uid} className="flex items-center justify-between gap-3 px-3 py-2">
+                  <span className="truncate">{m.email || m.uid}</span>
+                  {m.isAdmin ? (
+                    <span className="shrink-0 rounded bg-primary/15 px-2 py-0.5 text-[10px] font-bold uppercase text-primary">
+                      Admin
+                    </span>
+                  ) : (
+                    <span className="shrink-0 text-[10px] uppercase text-muted-foreground">Member</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
       )}
 
       <section className="bg-card border border-border rounded-xl p-6 shadow-sm mb-6">
@@ -112,7 +165,9 @@ function SettingsPage() {
           <dt className="text-muted-foreground">Schema</dt>
           <dd>v4 (pre-arrival + business settings)</dd>
           <dt className="text-muted-foreground">Runtime</dt>
-          <dd>{isElectron ? "Desktop (Electron) — data saved to disk" : "Browser — synced to Firestore"}</dd>
+          <dd>{isElectron ? "Desktop (Electron) — data saved to disk" : "Browser — shared Firestore + Storage"}</dd>
+          <dt className="text-muted-foreground">Role</dt>
+          <dd>{skipAuth ? "Desktop" : isAdmin ? "Admin" : "Member"}</dd>
           <dt className="text-muted-foreground">Products</dt>
           <dd>{state.products.filter((p) => !p.archived).length} active</dd>
           <dt className="text-muted-foreground">Customer stock rows</dt>
@@ -283,7 +338,16 @@ function SettingsPage() {
 
       <section className="bg-card border border-destructive/30 rounded-xl p-6 shadow-sm">
         <h2 className="font-bold text-sm uppercase tracking-wider text-destructive mb-4">Danger zone</h2>
-        <Button variant="destructive" onClick={() => setResetConfirm(true)}>
+        <p className="text-sm text-muted-foreground mb-4">
+          {isElectron || isAdmin
+            ? "Resets the shared warehouse to an empty seed. This cannot be undone."
+            : "Only an admin can reset the shared cloud warehouse."}
+        </p>
+        <Button
+          variant="destructive"
+          onClick={() => setResetConfirm(true)}
+          disabled={!isElectron && !isAdmin}
+        >
           Reset to empty seed
         </Button>
       </section>

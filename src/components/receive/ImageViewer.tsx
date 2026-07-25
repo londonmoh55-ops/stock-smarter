@@ -2,10 +2,11 @@ import { useCallback, useEffect, useRef, useState, type PointerEvent, type Wheel
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { uploadWarehousePhoto } from "@/lib/wms/storageUpload";
 
 interface ImageViewerProps {
   src: string | null;
-  onUpload: (dataUrl: string) => void;
+  onUpload: (url: string) => void;
   onClear: () => void;
   className?: string;
 }
@@ -21,6 +22,8 @@ export function ImageViewer({ src, onUpload, onClear, className }: ImageViewerPr
   const [dragging, setDragging] = useState(false);
   const dragOrigin = useRef({ x: 0, y: 0, panX: 0, panY: 0 });
   const [fullscreen, setFullscreen] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   const resetView = useCallback(() => {
     setScale(1);
@@ -45,11 +48,26 @@ export function ImageViewer({ src, onUpload, onClear, className }: ImageViewerPr
 
   function handleFile(file: File | null) {
     if (!file || !file.type.startsWith("image/")) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (typeof reader.result === "string") onUpload(reader.result);
-    };
-    reader.readAsDataURL(file);
+
+    // Electron / offline: keep data URLs in local state.
+    if (typeof window !== "undefined" && window.db) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (typeof reader.result === "string") onUpload(reader.result);
+      };
+      reader.readAsDataURL(file);
+      return;
+    }
+
+    setUploading(true);
+    setUploadError(null);
+    void uploadWarehousePhoto(file, "bons")
+      .then((url) => onUpload(url))
+      .catch((err) => {
+        console.error(err);
+        setUploadError(err instanceof Error ? err.message : "Upload failed");
+      })
+      .finally(() => setUploading(false));
   }
 
   function onWheel(e: WheelEvent) {
@@ -118,8 +136,8 @@ export function ImageViewer({ src, onUpload, onClear, className }: ImageViewerPr
   const controls = (
     <div className="shrink-0 space-y-2 border-t border-border bg-card p-3">
       <div className="flex flex-wrap gap-1">
-        <Button type="button" size="sm" variant="outline" onClick={() => fileRef.current?.click()}>
-          Upload
+        <Button type="button" size="sm" variant="outline" disabled={uploading} onClick={() => fileRef.current?.click()}>
+          {uploading ? "Uploading…" : "Upload"}
         </Button>
         <Button type="button" size="sm" variant="outline" disabled={!src} onClick={() => setRotate((r) => r + 90)}>
           Rotate
@@ -170,7 +188,9 @@ export function ImageViewer({ src, onUpload, onClear, className }: ImageViewerPr
       </div>
       <p className="text-[10px] text-muted-foreground">
         Wheel zoom · drag pan · {Math.round(scale * 100)}%
+        {typeof window !== "undefined" && !window.db ? " · stored in Firebase Storage" : ""}
       </p>
+      {uploadError && <p className="text-[10px] text-destructive">{uploadError}</p>}
     </div>
   );
 

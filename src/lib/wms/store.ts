@@ -9,20 +9,26 @@ const SSR_STATE: WmsState = buildSeed();
 let state: WmsState = SSR_STATE;
 let hydrated = false;
 let hydratePromise: Promise<void> | null = null;
-let cloudUid: string | null = null;
+/** When true, persist/hydrate the shared Firestore warehouse (web). */
+let cloudSync = false;
 let persistTimer: ReturnType<typeof setTimeout> | null = null;
 const listeners = new Set<() => void>();
 
-/** Bind Firestore persistence to the signed-in user (web). Pass null on sign-out. */
-export function setCloudUser(uid: string | null): void {
-  if (cloudUid === uid) return;
-  cloudUid = uid;
+/** Enable/disable shared Firestore persistence (web). Pass false on sign-out. */
+export function setCloudSync(enabled: boolean): void {
+  if (cloudSync === enabled) return;
+  cloudSync = enabled;
   hydrated = false;
   hydratePromise = null;
-  if (!uid) {
+  if (!enabled) {
     state = SSR_STATE;
     listeners.forEach((l) => l());
   }
+}
+
+/** @deprecated Use setCloudSync — kept for older call sites. */
+export function setCloudUser(uid: string | null): void {
+  setCloudSync(Boolean(uid));
 }
 
 async function hydrateFromDisk(): Promise<void> {
@@ -34,13 +40,13 @@ async function hydrateFromDisk(): Promise<void> {
     } catch {
       /* keep in-memory seed */
     }
-  } else if (cloudUid) {
+  } else if (cloudSync) {
     try {
-      const remote = await loadWarehouseState(cloudUid);
+      const remote = await loadWarehouseState();
       if (remote) state = migrateToCurrent(remote);
       else {
         state = buildSeed();
-        await saveWarehouseState(cloudUid, state);
+        await saveWarehouseState(state);
       }
     } catch (error) {
       console.error("Firestore hydrate failed", error);
@@ -68,11 +74,11 @@ function persist() {
     void window.db.save(state);
     return;
   }
-  if (!cloudUid) return;
+  if (!cloudSync) return;
   if (persistTimer) clearTimeout(persistTimer);
   persistTimer = setTimeout(() => {
-    if (!cloudUid) return;
-    void saveWarehouseState(cloudUid, state).catch((error) => {
+    if (!cloudSync) return;
+    void saveWarehouseState(state).catch((error) => {
       console.error("Firestore save failed", error);
     });
   }, 400);
