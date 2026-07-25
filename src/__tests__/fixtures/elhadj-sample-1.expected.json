@@ -1,0 +1,47 @@
+{
+  "invoice": "0000656",
+  "date": "11/07/2026",
+  "transporter": "ADEM FETHI",
+  "transporterNumber": "16",
+  "phone": "0663406290",
+  "items": [
+    {
+      "product": "SHORT",
+      "customer": "LOFEI",
+      "quantity": 8,
+      "chargeType": "piece",
+      "pricePerPiece": 500
+    },
+    {
+      "product": "CASQUE",
+      "customer": "TLA",
+      "quantity": 1,
+      "chargeType": "piece",
+      "pricePerPiece": 4500
+    },
+    {
+      "product": "TIZANA",
+      "customer": "SALAH",
+      "quantity": 4,
+      "chargeType": "weight",
+      "weight": 1.3,
+      "pricePerKg": 300
+    },
+    {
+      "product": "GAME",
+      "customer": null,
+      "quantity": 1,
+      "chargeType": "piece",
+      "pricePerPiece": 800,
+      "needsReview": ["customer"]
+    },
+    {
+      "product": "AIRPADS",
+      "customer": "عبود",
+      "quantity": 4,
+      "chargeType": "weight",
+      "weight": 0.7,
+      "pricePerKg": 300
+    }
+  ]
+}

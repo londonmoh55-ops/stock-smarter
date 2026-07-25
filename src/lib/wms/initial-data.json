@@ -1,0 +1,2584 @@
+{
+  "products": [
+    {
+      "id": "PRD-0163",
+      "name": "climatisur",
+      "category": "General",
+      "countingMethod": "weight",
+      "unitLabel": "KG",
+      "purchasePrice": 0,
+      "sellingPrice": 5000,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T13:36:38.693Z"
+    },
+    {
+      "id": "PRD-0162",
+      "name": "vitamin",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T10:13:17.960Z"
+    },
+    {
+      "id": "PRD-0161",
+      "name": "glasses",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T10:13:12.953Z"
+    },
+    {
+      "id": "PRD-0160",
+      "name": "lalim cigar",
+      "category": "General",
+      "countingMethod": "weight",
+      "unitLabel": "KG",
+      "purchasePrice": 0,
+      "sellingPrice": 5000,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T10:13:12.300Z"
+    },
+    {
+      "id": "PRD-0159",
+      "name": "straight hair comb",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T10:13:11.559Z"
+    },
+    {
+      "id": "PRD-0158",
+      "name": "far plastic",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T10:13:10.824Z"
+    },
+    {
+      "id": "PRD-0157",
+      "name": "rop blanch + rop soire",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T10:13:10.051Z"
+    },
+    {
+      "id": "PRD-0156",
+      "name": "moniter light",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 2000,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:49:11.846Z"
+    },
+    {
+      "id": "PRD-0155",
+      "name": "gps",
+      "category": "General",
+      "countingMethod": "weight",
+      "unitLabel": "KG",
+      "purchasePrice": 0,
+      "sellingPrice": 6000,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:49:05.328Z"
+    },
+    {
+      "id": "PRD-0154",
+      "name": "eyelashes",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:49:04.558Z"
+    },
+    {
+      "id": "PRD-0153",
+      "name": "solar pool light",
+      "category": "General",
+      "countingMethod": "weight",
+      "unitLabel": "KG",
+      "purchasePrice": 3000,
+      "sellingPrice": 4000,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:49:04.059Z"
+    },
+    {
+      "id": "PRD-0152",
+      "name": "antichoc orange",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:49:03.524Z"
+    },
+    {
+      "id": "PRD-0151",
+      "name": "kissan",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 5000,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:49:02.971Z"
+    },
+    {
+      "id": "PRD-0150",
+      "name": "filter",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:49:02.206Z"
+    },
+    {
+      "id": "PRD-0149",
+      "name": "la tonsion",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:59.344Z"
+    },
+    {
+      "id": "PRD-0148",
+      "name": "black box",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:58.945Z"
+    },
+    {
+      "id": "PRD-0147",
+      "name": "rofani",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:58.545Z"
+    },
+    {
+      "id": "PRD-0146",
+      "name": "gzino",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 4500,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:58.166Z"
+    },
+    {
+      "id": "PRD-0145",
+      "name": "antichoc",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:57.742Z"
+    },
+    {
+      "id": "PRD-0144",
+      "name": "antichoc white",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:57.142Z"
+    },
+    {
+      "id": "PRD-0143",
+      "name": "keys",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:56.807Z"
+    },
+    {
+      "id": "PRD-0142",
+      "name": "logo",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:56.426Z"
+    },
+    {
+      "id": "PRD-0141",
+      "name": "book",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:56.062Z"
+    },
+    {
+      "id": "PRD-0140",
+      "name": "detox",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:55.674Z"
+    },
+    {
+      "id": "PRD-0139",
+      "name": "h3c",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 4500,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:55.256Z"
+    },
+    {
+      "id": "PRD-0138",
+      "name": "silicon",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:54.801Z"
+    },
+    {
+      "id": "PRD-0137",
+      "name": "zjaj",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:54.294Z"
+    },
+    {
+      "id": "PRD-0136",
+      "name": "somala",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:53.668Z"
+    },
+    {
+      "id": "PRD-0135",
+      "name": "casq",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:52.898Z"
+    },
+    {
+      "id": "PRD-0134",
+      "name": "casio",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:51.443Z"
+    },
+    {
+      "id": "PRD-0133",
+      "name": "carplay",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:48.074Z"
+    },
+    {
+      "id": "PRD-0132",
+      "name": "mbc",
+      "category": "General",
+      "countingMethod": "weight",
+      "unitLabel": "KG",
+      "purchasePrice": 3000,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:47.429Z"
+    },
+    {
+      "id": "PRD-0131",
+      "name": "stickers",
+      "category": "General",
+      "countingMethod": "weight",
+      "unitLabel": "KG",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:46.242Z"
+    },
+    {
+      "id": "PRD-0130",
+      "name": "skinoren",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:45.518Z"
+    },
+    {
+      "id": "PRD-0129",
+      "name": "watch",
+      "category": "General",
+      "countingMethod": "weight",
+      "unitLabel": "KG",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:44.800Z"
+    },
+    {
+      "id": "PRD-0128",
+      "name": "tapi",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 1500,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T09:48:43.876Z"
+    },
+    {
+      "id": "PRD-0127",
+      "name": "battry iphone",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T08:53:43.097Z"
+    },
+    {
+      "id": "PRD-0126",
+      "name": "battry ipad",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T08:53:38.598Z"
+    },
+    {
+      "id": "PRD-0125",
+      "name": "chicha",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T08:53:37.884Z"
+    },
+    {
+      "id": "PRD-0124",
+      "name": "souris",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 0,
+      "sellingPrice": 0,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T08:53:35.175Z"
+    },
+    {
+      "id": "PRD-3wj9scaj",
+      "name": "PRD-3wj9scaj",
+      "category": "General",
+      "countingMethod": "weight",
+      "unitLabel": "KG",
+      "purchasePrice": 2500,
+      "sellingPrice": 3000,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T14:40:17.825Z"
+    },
+    {
+      "id": "PRD-tec779j3",
+      "name": "PRD-tec779j3",
+      "category": "General",
+      "countingMethod": "weight",
+      "unitLabel": "KG",
+      "purchasePrice": 3000,
+      "sellingPrice": 3600,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T14:40:17.825Z"
+    },
+    {
+      "id": "PRD-m4mydstq",
+      "name": "PRD-m4mydstq",
+      "category": "General",
+      "countingMethod": "weight",
+      "unitLabel": "KG",
+      "purchasePrice": 3000,
+      "sellingPrice": 3600,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T14:40:17.825Z"
+    },
+    {
+      "id": "PRD-e6c8ovvu",
+      "name": "PRD-e6c8ovvu",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 700,
+      "sellingPrice": 840,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T14:40:17.825Z"
+    },
+    {
+      "id": "PRD-ok07z9jn",
+      "name": "PRD-ok07z9jn",
+      "category": "General",
+      "countingMethod": "piece",
+      "unitLabel": "Piece",
+      "purchasePrice": 1500,
+      "sellingPrice": 1800,
+      "lowStockThreshold": 0,
+      "archived": false,
+      "createdAt": "2026-07-07T14:40:17.825Z"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "SUP-MIGRATED",
+      "name": "mimi boutayan",
+      "phone": "0557060423",
+      "archived": false
+    },
+    {
+      "id": "SUP-xyhb7y3m",
+      "name": "boubina kelea",
+      "phone": "0542325574",
+      "archived": false
+    },
+    {
+      "id": "SUP-hgs7ejaa",
+      "name": "hocine taleb",
+      "phone": "0551448632",
+      "archived": false
+    },
+    {
+      "id": "SUP-25neekou",
+      "name": "ahmed dala",
+      "phone": "0555237659",
+      "archived": false
+    },
+    {
+      "id": "SUP-5h9pf67n",
+      "name": "amir setif",
+      "phone": "0794215241",
+      "archived": false
+    },
+    {
+      "id": "SUP-r6hqvfa4",
+      "name": "moustafa khaldi",
+      "phone": "0662016867",
+      "archived": false
+    },
+    {
+      "id": "SUP-ggulwf5l",
+      "name": "abdou ain neaja",
+      "phone": "0784180167",
+      "archived": false
+    },
+    {
+      "id": "SUP-9rvjxq2r",
+      "name": "mourad kouba",
+      "phone": "0555274043",
+      "archived": false
+    },
+    {
+      "id": "SUP-2pnarf45",
+      "name": "saleh mourad kouba",
+      "phone": "0660396306",
+      "archived": false
+    },
+    {
+      "id": "SUP-bbfyryyc",
+      "name": "abd rahaman telemcan",
+      "phone": "0659262211",
+      "archived": false
+    },
+    {
+      "id": "SUP-cb89hwo0",
+      "name": "rayan rahmani",
+      "phone": "",
+      "archived": false
+    },
+    {
+      "id": "SUP-5g7q8l4n",
+      "name": "reda merag",
+      "phone": "0562280418",
+      "archived": false
+    },
+    {
+      "id": "SUP-4sfxj1yh",
+      "name": "bou khit oussama",
+      "phone": "0557032093",
+      "archived": false
+    },
+    {
+      "id": "SUP-xztfoi9p",
+      "name": "abd raouf harach",
+      "phone": "0540394475",
+      "archived": false
+    },
+    {
+      "id": "SUP-vrv8299z",
+      "name": "salah din harach bouliyo",
+      "phone": "0553782857",
+      "archived": false
+    },
+    {
+      "id": "SUP-q99w9o9s",
+      "name": "mehdi harach",
+      "phone": "0771299378",
+      "archived": false
+    },
+    {
+      "id": "SUP-anrlkpuy",
+      "name": "sofian didin",
+      "phone": "0558038183",
+      "archived": false
+    },
+    {
+      "id": "SUP-z84yhc2f",
+      "name": "sami hamitouch",
+      "phone": "0776110322",
+      "archived": false
+    },
+    {
+      "id": "SUP-bb3e1cnm",
+      "name": "didin",
+      "phone": "0792998805",
+      "archived": false
+    },
+    {
+      "id": "SUP-mvw3pnpe",
+      "name": "mohamed kadri",
+      "phone": "0669240814",
+      "archived": false
+    },
+    {
+      "id": "SUP-s4t7atwa",
+      "name": "mehdi bab l oued",
+      "phone": "0782022974",
+      "archived": false
+    },
+    {
+      "id": "SUP-ymz099sm",
+      "name": "bedro libanani",
+      "phone": "0773636681",
+      "archived": false
+    },
+    {
+      "id": "SUP-r855aw86",
+      "name": "chihab blida",
+      "phone": "0550758674",
+      "archived": false
+    },
+    {
+      "id": "SUP-dbw5jzy0",
+      "name": "chemso",
+      "phone": "0794380966",
+      "archived": false
+    },
+    {
+      "id": "SUP-nkwgwpjc",
+      "name": "belal libanani",
+      "phone": "0560590636",
+      "archived": false
+    },
+    {
+      "id": "SUP-gm0m1tad",
+      "name": "adlan libanani",
+      "phone": "0779661595",
+      "archived": false
+    },
+    {
+      "id": "SUP-7i11orln",
+      "name": "chemso libanani",
+      "phone": "0795746414",
+      "archived": false
+    },
+    {
+      "id": "SUP-ndjah4wd",
+      "name": "amine oued roman",
+      "phone": "0777309364",
+      "archived": false
+    },
+    {
+      "id": "SUP-m7n62mrl",
+      "name": "monaam hamdani",
+      "phone": "0676303647",
+      "archived": false
+    },
+    {
+      "id": "SUP-kabigobp",
+      "name": "mohamed ben salem",
+      "phone": "0540312711",
+      "archived": false
+    },
+    {
+      "id": "SUP-shn05t0o",
+      "name": "abdou belfort",
+      "phone": "0558493507",
+      "archived": false
+    },
+    {
+      "id": "SUP-fnf0sz54",
+      "name": "lotfi 3301",
+      "phone": "",
+      "archived": false
+    },
+    {
+      "id": "SUP-gzr8ztqe",
+      "name": "zino naaimi",
+      "phone": "0557174931",
+      "archived": false
+    },
+    {
+      "id": "SUP-pqawxgyt",
+      "name": "kadri mohamed",
+      "phone": "0556287409",
+      "archived": false
+    },
+    {
+      "id": "SUP-re3s0zwf",
+      "name": "gholam larbaa",
+      "phone": "0779285163",
+      "archived": false
+    },
+    {
+      "id": "SUP-tkumgad9",
+      "name": "sofan la montage",
+      "phone": "0798517706",
+      "archived": false
+    },
+    {
+      "id": "SUP-kpw4lf99",
+      "name": "amine lotfi",
+      "phone": "0558672375",
+      "archived": false
+    },
+    {
+      "id": "SUP-nwf3hbw1",
+      "name": "khaled moustafa",
+      "phone": "0779523718",
+      "archived": false
+    },
+    {
+      "id": "SUP-95nbjvoq",
+      "name": "mahia din",
+      "phone": "0660370348",
+      "archived": false
+    },
+    {
+      "id": "SUP-nvylvpkc",
+      "name": "abd bari ben abidi",
+      "phone": "0794030146",
+      "archived": false
+    },
+    {
+      "id": "SUP-ekgmxlfd",
+      "name": "mounir ghilizan",
+      "phone": "0778244591",
+      "archived": false
+    },
+    {
+      "id": "SUP-2ymsu94k",
+      "name": "hami ghilizan",
+      "phone": "0556 85 12 14",
+      "archived": false
+    },
+    {
+      "id": "SUP-4rfe8uiz",
+      "name": "tibaboy",
+      "phone": "",
+      "archived": false
+    },
+    {
+      "id": "SUP-nv7sgpdu",
+      "name": "ahlam blida",
+      "phone": "0557050031",
+      "archived": false
+    },
+    {
+      "id": "SUP-3plx0hy8",
+      "name": "fouad constentine",
+      "phone": "0770439306",
+      "archived": false
+    },
+    {
+      "id": "SUP-wx20p7kp",
+      "name": "monaam djidy",
+      "phone": "0556997439",
+      "archived": false
+    },
+    {
+      "id": "SUP-qyzkkzst",
+      "name": "akram jijli",
+      "phone": "0781849075",
+      "archived": false
+    }
+  ],
+  "customers": [
+    {
+      "id": "CUS-pl91246y",
+      "name": "mol casq",
+      "phone": "",
+      "archived": false
+    },
+    {
+      "id": "CUS-beyxew1e",
+      "name": "mourad naamaoui",
+      "phone": "",
+      "archived": false
+    },
+    {
+      "id": "CUST-zck4k9zg",
+      "name": "dwad",
+      "phone": "054545454",
+      "notes": "—",
+      "archived": false
+    },
+    {
+      "id": "CUST-5k573ocv",
+      "name": "abdka",
+      "phone": "058999966",
+      "notes": "—",
+      "archived": false
+    }
+  ],
+  "warehouses": [
+    {
+      "id": "wh_main",
+      "name": "El Hadj Cargo",
+      "location": "Blida, Algeria",
+      "archived": false
+    }
+  ],
+  "bons": [
+    {
+      "id": "BON-42nh6qor",
+      "number": "BON-0001",
+      "supplierId": "SUP-5h9pf67n",
+      "supplierPhone": "0794215241",
+      "date": "2026-07-04T02:56:00.000Z",
+      "expectedArrival": "2026-07-04T02:56:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 4,
+          "unitPrice": 1000,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 0.95,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-l9vs5h0t",
+      "number": "BON-0002",
+      "supplierId": "SUP-r6hqvfa4",
+      "supplierPhone": "0662016867",
+      "date": "2026-07-04T22:52:00.000Z",
+      "expectedArrival": "2026-07-04T22:52:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 2,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-0z3h9ibw",
+      "number": "BON-0003",
+      "supplierId": "SUP-ggulwf5l",
+      "supplierPhone": "0784180167",
+      "date": "2026-07-04T12:44:00.000Z",
+      "expectedArrival": "2026-07-04T12:44:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 1.95,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 4,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 0.95,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 4,
+          "unitPrice": 800,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 0.85,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-rq8fyycq",
+      "number": "BON-0004",
+      "supplierId": "SUP-9rvjxq2r",
+      "supplierPhone": "0555274043",
+      "date": "2026-07-04T20:40:00.000Z",
+      "expectedArrival": "2026-07-04T20:40:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 4,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 0.95,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 3,
+          "unitPrice": 800,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-bbpsznih",
+      "number": "BON-0005",
+      "supplierId": "SUP-2pnarf45",
+      "supplierPhone": "0660396306",
+      "date": "2026-07-04T21:32:00.000Z",
+      "expectedArrival": "2026-07-04T21:32:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 0.95,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 4,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 2,
+          "unitPrice": 800,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-s3qgqanz",
+      "number": "BON-0006",
+      "supplierId": "SUP-bbfyryyc",
+      "supplierPhone": "0659262211",
+      "date": "2026-07-04T12:26:00.000Z",
+      "expectedArrival": "2026-07-04T12:26:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 0.95,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 3,
+          "unitPrice": 800,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 1,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 1.7,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 0.4,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-3fvij6xg",
+      "number": "BON-0007",
+      "supplierId": "SUP-xztfoi9p",
+      "supplierPhone": "0540394475",
+      "date": "2026-07-04T21:06:00.000Z",
+      "expectedArrival": "2026-07-04T21:06:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 1.9,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 6,
+          "unitPrice": 800,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-ix3nn4rj",
+      "number": "BON-0008",
+      "supplierId": "SUP-q99w9o9s",
+      "supplierPhone": "0771299378",
+      "date": "2026-07-04T22:00:00.000Z",
+      "expectedArrival": "2026-07-04T22:00:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 1,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-tgoja2br",
+      "number": "BON-0009",
+      "supplierId": "SUP-anrlkpuy",
+      "supplierPhone": "0558038183",
+      "date": "2026-07-04T07:24:00.000Z",
+      "expectedArrival": "2026-07-04T07:24:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 0.4,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 4,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 0.95,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 4,
+          "unitPrice": 800,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-l8kkdpaj",
+      "number": "BON-0010",
+      "supplierId": "SUP-z84yhc2f",
+      "supplierPhone": "0776110322",
+      "date": "2026-07-04T04:13:00.000Z",
+      "expectedArrival": "2026-07-04T04:13:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 4,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 0.4,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 4,
+          "unitPrice": 800,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 0.95,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 0.6,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-xsnr6vw4",
+      "number": "BON-0011",
+      "supplierId": "SUP-bb3e1cnm",
+      "supplierPhone": "0792998805",
+      "date": "2026-07-04T02:59:00.000Z",
+      "expectedArrival": "2026-07-04T02:59:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 0.2,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 0.4,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 0.7,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 4,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 4,
+          "unitPrice": 800,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-jpsmib6z",
+      "number": "BON-0012",
+      "supplierId": "SUP-s4t7atwa",
+      "supplierPhone": "0782022974",
+      "date": "2026-07-02T00:00:00.000Z",
+      "expectedArrival": "2026-07-02T00:00:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-0128",
+          "quantity": 2,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-0132",
+          "quantity": 0.75,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-0142",
+          "quantity": 0.25,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-0131",
+          "quantity": 1,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-rsgqbe3s",
+      "number": "BON-0013",
+      "supplierId": "SUP-ymz099sm",
+      "supplierPhone": "0773636681",
+      "date": "2026-07-02T10:03:00.000Z",
+      "expectedArrival": "2026-07-02T10:03:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 1,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 2,
+          "unitPrice": 8000,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 8,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 2,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-9wvy8riv",
+      "number": "BON-0014",
+      "supplierId": "SUP-r855aw86",
+      "supplierPhone": "0550758674",
+      "date": "2026-07-02T10:58:00.000Z",
+      "expectedArrival": "2026-07-02T10:58:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 4.1,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-tec779j3",
+          "quantity": 0.75,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 1.35,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 4,
+          "unitPrice": 700,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 6,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-c3wfl0rp",
+      "number": "BON-0015",
+      "supplierId": "SUP-dbw5jzy0",
+      "supplierPhone": "0794380966",
+      "date": "2026-07-02T09:53:00.000Z",
+      "expectedArrival": "2026-07-02T09:53:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 6,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-t7uyd06i",
+      "number": "BON-0016",
+      "supplierId": "SUP-nkwgwpjc",
+      "supplierPhone": "0560590636",
+      "date": "2026-07-02T09:46:00.000Z",
+      "expectedArrival": "2026-07-02T09:46:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 2.9,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-h9nu41w7",
+      "number": "BON-0017",
+      "supplierId": "SUP-gm0m1tad",
+      "supplierPhone": "0779661595",
+      "date": "2026-07-02T10:44:00.000Z",
+      "expectedArrival": "2026-07-02T10:44:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 6,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-1cwhzs7n",
+      "number": "BON-0018",
+      "supplierId": "SUP-7i11orln",
+      "supplierPhone": "0795746414",
+      "date": "2026-07-02T08:41:00.000Z",
+      "expectedArrival": "2026-07-02T08:41:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 1.95,
+          "unitPrice": 2500,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 3,
+          "unitPrice": 800,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantity": 5,
+          "unitPrice": 800,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 1.45,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-llhjtq35",
+      "number": "BON-0019",
+      "supplierId": "SUP-m7n62mrl",
+      "supplierPhone": "0676303647",
+      "date": "2026-07-02T07:29:00.000Z",
+      "expectedArrival": "2026-07-02T07:29:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 6,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-s4tr9e5n",
+      "number": "BON-0020",
+      "supplierId": "SUP-kabigobp",
+      "supplierPhone": "0540312711",
+      "date": "2026-07-02T00:00:00.000Z",
+      "expectedArrival": "2026-07-02T00:00:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-0128",
+          "quantity": 6,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-0153",
+          "quantity": 3.4,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-0132",
+          "quantity": 1.45,
+          "unitPrice": 3000,
+          "countingMethod": "weight"
+        },
+        {
+          "productId": "PRD-0139",
+          "quantity": 3,
+          "unitPrice": 4500,
+          "countingMethod": "piece"
+        },
+        {
+          "productId": "PRD-0146",
+          "quantity": 6,
+          "unitPrice": 4500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-nyg2fmps",
+      "number": "BON-0021",
+      "supplierId": "SUP-shn05t0o",
+      "supplierPhone": "0558493507",
+      "date": "2026-07-02T07:14:00.000Z",
+      "expectedArrival": "2026-07-02T07:14:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 4,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-r5l53cmg",
+      "number": "BON-0022",
+      "supplierId": "SUP-fnf0sz54",
+      "supplierPhone": "",
+      "date": "2026-07-02T10:07:00.000Z",
+      "expectedArrival": "2026-07-02T10:07:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 4,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-afmp5axz",
+      "number": "BON-0023",
+      "supplierId": "SUP-gzr8ztqe",
+      "supplierPhone": "0557174931",
+      "date": "2026-07-02T09:59:00.000Z",
+      "expectedArrival": "2026-07-02T09:59:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 7,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-fkvq78kq",
+      "number": "BON-0024",
+      "supplierId": "SUP-pqawxgyt",
+      "supplierPhone": "0556287409",
+      "date": "2026-07-02T02:52:00.000Z",
+      "expectedArrival": "2026-07-02T02:52:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 28,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-dm3xhh12",
+      "number": "BON-0025",
+      "supplierId": "SUP-re3s0zwf",
+      "supplierPhone": "0779285163",
+      "date": "2026-07-02T08:47:00.000Z",
+      "expectedArrival": "2026-07-02T08:47:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 16,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-mvxuau4f",
+      "number": "BON-0026",
+      "supplierId": "SUP-kpw4lf99",
+      "supplierPhone": "0558672375",
+      "date": "2026-07-02T09:23:00.000Z",
+      "expectedArrival": "2026-07-02T09:23:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 4,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-lzxyyz8v",
+      "number": "BON-0027",
+      "supplierId": "SUP-nwf3hbw1",
+      "supplierPhone": "0779523718",
+      "date": "2026-07-01T02:01:00.000Z",
+      "expectedArrival": "2026-07-01T02:01:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 11,
+          "unitPrice": 1600,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-7ewz508r",
+      "number": "BON-0028",
+      "supplierId": "SUP-95nbjvoq",
+      "supplierPhone": "0660370348",
+      "date": "2026-06-30T20:36:00.000Z",
+      "expectedArrival": "2026-06-30T20:36:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 5,
+          "unitPrice": 2000,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received",
+      "notes": "bon 2"
+    },
+    {
+      "id": "BON-1ny9w9hm",
+      "number": "BON-0029",
+      "supplierId": "SUP-nvylvpkc",
+      "supplierPhone": "0794030146",
+      "date": "2026-06-30T19:08:00.000Z",
+      "expectedArrival": "2026-06-30T19:08:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 9,
+          "unitPrice": 2000,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received",
+      "notes": "bon 2"
+    },
+    {
+      "id": "BON-lrufy3xs",
+      "number": "BON-0030",
+      "supplierId": "SUP-ekgmxlfd",
+      "supplierPhone": "0778244591",
+      "date": "2026-06-29T05:03:00.000Z",
+      "expectedArrival": "2026-06-29T05:03:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-m4mydstq",
+          "quantity": 8.05,
+          "unitPrice": 3500,
+          "countingMethod": "weight"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-7h9nmeko",
+      "number": "BON-0031",
+      "supplierId": "SUP-2ymsu94k",
+      "supplierPhone": "0556 85 12 14",
+      "date": "2026-06-30T19:59:00.000Z",
+      "expectedArrival": "2026-06-30T19:59:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantity": 1,
+          "unitPrice": 2500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "waiting"
+    },
+    {
+      "id": "BON-99ut8nji",
+      "number": "BON-0032",
+      "supplierId": "SUP-3plx0hy8",
+      "supplierPhone": "0770439306",
+      "date": "2026-06-30T10:36:00.000Z",
+      "expectedArrival": "2026-06-30T10:36:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 21,
+          "unitPrice": 2000,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "received"
+    },
+    {
+      "id": "BON-9eh76h8k",
+      "number": "BON-0033",
+      "supplierId": "SUP-wx20p7kp",
+      "supplierPhone": "0556997439",
+      "date": "2026-06-30T21:18:00.000Z",
+      "expectedArrival": "2026-06-30T21:18:00.000Z",
+      "warehouseId": "wh_main",
+      "items": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantity": 8,
+          "unitPrice": 1500,
+          "countingMethod": "piece"
+        }
+      ],
+      "status": "waiting"
+    }
+  ],
+  "purchases": [
+    {
+      "id": "pur_BON-42nh6qor",
+      "number": "PUR-0001",
+      "bonId": "BON-42nh6qor",
+      "supplierId": "SUP-5h9pf67n",
+      "warehouseId": "wh_main",
+      "date": "2026-07-04T02:56:00.000Z",
+      "lines": [
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantityReceived": 4,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1000
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantityReceived": 0.95,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-s3qgqanz",
+      "number": "PUR-0002",
+      "bonId": "BON-s3qgqanz",
+      "supplierId": "SUP-bbfyryyc",
+      "warehouseId": "wh_main",
+      "date": "2026-07-04T12:26:00.000Z",
+      "lines": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantityReceived": 0,
+          "quantityMissing": 0.95,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 2500
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantityReceived": 3,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 800
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 1,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantityReceived": 1.7,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantityReceived": 0,
+          "quantityMissing": 0.4,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-tgoja2br",
+      "number": "PUR-0003",
+      "bonId": "BON-tgoja2br",
+      "supplierId": "SUP-anrlkpuy",
+      "warehouseId": "wh_main",
+      "date": "2026-07-04T07:24:00.000Z",
+      "lines": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantityReceived": 0.4,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 2500
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 4,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantityReceived": 0.95,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantityReceived": 4,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 800
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-l8kkdpaj",
+      "number": "PUR-0004",
+      "bonId": "BON-l8kkdpaj",
+      "supplierId": "SUP-z84yhc2f",
+      "warehouseId": "wh_main",
+      "date": "2026-07-04T04:13:00.000Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 0,
+          "quantityMissing": 4,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        },
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantityReceived": 0.4,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 2500
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantityReceived": 4,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 800
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantityReceived": 0.95,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantityReceived": 0.6,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-xsnr6vw4",
+      "number": "PUR-0005",
+      "bonId": "BON-xsnr6vw4",
+      "supplierId": "SUP-bb3e1cnm",
+      "warehouseId": "wh_main",
+      "date": "2026-07-04T02:59:00.000Z",
+      "lines": [
+        {
+          "productId": "PRD-m4mydstq",
+          "quantityReceived": 0,
+          "quantityMissing": 0.2,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        },
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantityReceived": 0,
+          "quantityMissing": 0.4,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 2500
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantityReceived": 0,
+          "quantityMissing": 0.7,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 0,
+          "quantityMissing": 4,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantityReceived": 0,
+          "quantityMissing": 4,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 800
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-9wvy8riv",
+      "number": "PUR-0006",
+      "bonId": "BON-9wvy8riv",
+      "supplierId": "SUP-r855aw86",
+      "warehouseId": "wh_main",
+      "date": "2026-07-07T14:40:17.825Z",
+      "lines": [
+        {
+          "productId": "PRD-3wj9scaj",
+          "quantityReceived": 4.1,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 2500
+        },
+        {
+          "productId": "PRD-tec779j3",
+          "quantityReceived": 0.75,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        },
+        {
+          "productId": "PRD-m4mydstq",
+          "quantityReceived": 1.35,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        },
+        {
+          "productId": "PRD-e6c8ovvu",
+          "quantityReceived": 4,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 700
+        },
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 6,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-c3wfl0rp",
+      "number": "PUR-0007",
+      "bonId": "BON-c3wfl0rp",
+      "supplierId": "SUP-dbw5jzy0",
+      "warehouseId": "wh_main",
+      "date": "2026-07-04T12:52:05.967Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 6,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-s4tr9e5n",
+      "number": "PUR-0008",
+      "bonId": "BON-s4tr9e5n",
+      "supplierId": "SUP-kabigobp",
+      "warehouseId": "wh_main",
+      "date": "2026-07-07T11:26:11.681Z",
+      "lines": [
+        {
+          "productId": "PRD-0128",
+          "quantityReceived": 6,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        },
+        {
+          "productId": "PRD-0153",
+          "quantityReceived": 3.4,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        },
+        {
+          "productId": "PRD-0132",
+          "quantityReceived": 2.4,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3000
+        },
+        {
+          "productId": "PRD-0139",
+          "quantityReceived": 3,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 4500
+        },
+        {
+          "productId": "PRD-0146",
+          "quantityReceived": 6,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 4500
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-nyg2fmps",
+      "number": "PUR-0009",
+      "bonId": "BON-nyg2fmps",
+      "supplierId": "SUP-shn05t0o",
+      "warehouseId": "wh_main",
+      "date": "2026-07-05T13:56:06.204Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 4,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-r5l53cmg",
+      "number": "PUR-0010",
+      "bonId": "BON-r5l53cmg",
+      "supplierId": "SUP-fnf0sz54",
+      "warehouseId": "wh_main",
+      "date": "2026-07-02T10:07:00.000Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 0,
+          "quantityMissing": 4,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-afmp5axz",
+      "number": "PUR-0011",
+      "bonId": "BON-afmp5axz",
+      "supplierId": "SUP-gzr8ztqe",
+      "warehouseId": "wh_main",
+      "date": "2026-07-05T13:50:59.877Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 7,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-fkvq78kq",
+      "number": "PUR-0012",
+      "bonId": "BON-fkvq78kq",
+      "supplierId": "SUP-pqawxgyt",
+      "warehouseId": "wh_main",
+      "date": "2026-07-05T13:51:10.269Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 28,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-dm3xhh12",
+      "number": "PUR-0013",
+      "bonId": "BON-dm3xhh12",
+      "supplierId": "SUP-re3s0zwf",
+      "warehouseId": "wh_main",
+      "date": "2026-07-04T15:40:59.790Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 16,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1500
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-lzxyyz8v",
+      "number": "PUR-0014",
+      "bonId": "BON-lzxyyz8v",
+      "supplierId": "SUP-nwf3hbw1",
+      "warehouseId": "wh_main",
+      "date": "2026-07-06T13:51:23.989Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 11,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 1600
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-7ewz508r",
+      "number": "PUR-0015",
+      "bonId": "BON-7ewz508r",
+      "supplierId": "SUP-95nbjvoq",
+      "warehouseId": "wh_main",
+      "date": "2026-07-06T01:12:35.017Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 5,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 2000
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-1ny9w9hm",
+      "number": "PUR-0016",
+      "bonId": "BON-1ny9w9hm",
+      "supplierId": "SUP-nvylvpkc",
+      "warehouseId": "wh_main",
+      "date": "2026-07-04T12:52:35.494Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 9,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 2000
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-lrufy3xs",
+      "number": "PUR-0017",
+      "bonId": "BON-lrufy3xs",
+      "supplierId": "SUP-ekgmxlfd",
+      "warehouseId": "wh_main",
+      "date": "2026-07-06T16:17:29.133Z",
+      "lines": [
+        {
+          "productId": "PRD-m4mydstq",
+          "quantityReceived": 8.05,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 3500
+        }
+      ]
+    },
+    {
+      "id": "pur_BON-99ut8nji",
+      "number": "PUR-0018",
+      "bonId": "BON-99ut8nji",
+      "supplierId": "SUP-3plx0hy8",
+      "warehouseId": "wh_main",
+      "date": "2026-07-06T09:10:02.833Z",
+      "lines": [
+        {
+          "productId": "PRD-ok07z9jn",
+          "quantityReceived": 21,
+          "quantityMissing": 0,
+          "quantityDamaged": 0,
+          "finalPurchasePrice": 2000
+        }
+      ]
+    }
+  ],
+  "sales": [
+    {
+      "id": "SALE-2026-0001",
+      "number": "SALE-2026-0001",
+      "customerId": "CUS-pl91246y",
+      "warehouseId": "wh_main",
+      "date": "2026-07-07T07:30:07.980Z",
+      "items": [
+        {
+          "productId": "PRD-0135",
+          "quantity": 12,
+          "unitPrice": 6000
+        }
+      ]
+    }
+  ],
+  "transfers": [],
+  "cash": [
+    {
+      "id": "CASH-mo790b6l",
+      "date": "2026-07-07",
+      "kind": "manual_in",
+      "amount": 106700,
+      "label": "l boss"
+    },
+    {
+      "id": "CASH-68cq64bt",
+      "date": "2026-07-07",
+      "kind": "manual_in",
+      "amount": 126500,
+      "label": "brahim"
+    },
+    {
+      "id": "CASH-jpnm38uk",
+      "date": "2026-07-07",
+      "kind": "manual_out",
+      "amount": 4000,
+      "label": "transfar"
+    },
+    {
+      "id": "CASH-brf23nyg",
+      "date": "2026-07-07",
+      "kind": "manual_in",
+      "amount": 200000,
+      "label": "nourdin"
+    },
+    {
+      "id": "CASH-56idgty3",
+      "date": "2026-07-07",
+      "kind": "manual_out",
+      "amount": 18000,
+      "label": "nourdin — black box miss click"
+    },
+    {
+      "id": "CASH-1rzdtfsh",
+      "date": "2026-07-07",
+      "kind": "manual_out",
+      "amount": 1000,
+      "label": "hakim",
+      "category": "other"
+    },
+    {
+      "id": "CASH-7m5zcp95",
+      "date": "2026-07-07",
+      "kind": "manual_in",
+      "amount": 109750,
+      "label": "mouard"
+    },
+    {
+      "id": "CASH-sa3mwd82",
+      "date": "2026-07-07",
+      "kind": "opening",
+      "amount": 484000,
+      "label": "Opening capital"
+    }
+  ],
+  "adjustments": [
+    {
+      "id": "adj_mig_1",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0162",
+      "warehouseId": "wh_main",
+      "delta": 18,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_2",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0161",
+      "warehouseId": "wh_main",
+      "delta": 44,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_3",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0160",
+      "warehouseId": "wh_main",
+      "delta": -7.4,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_4",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0159",
+      "warehouseId": "wh_main",
+      "delta": 9,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_5",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0158",
+      "warehouseId": "wh_main",
+      "delta": 1,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_6",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0155",
+      "warehouseId": "wh_main",
+      "delta": -1.95,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_7",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0154",
+      "warehouseId": "wh_main",
+      "delta": 10,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_8",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0153",
+      "warehouseId": "wh_main",
+      "delta": -3.4,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_9",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0152",
+      "warehouseId": "wh_main",
+      "delta": 4,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_10",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0151",
+      "warehouseId": "wh_main",
+      "delta": 5,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_11",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0150",
+      "warehouseId": "wh_main",
+      "delta": 16,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_12",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0149",
+      "warehouseId": "wh_main",
+      "delta": 15,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_13",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0147",
+      "warehouseId": "wh_main",
+      "delta": 35,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_14",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0146",
+      "warehouseId": "wh_main",
+      "delta": 15,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_15",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0145",
+      "warehouseId": "wh_main",
+      "delta": 63,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_16",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0144",
+      "warehouseId": "wh_main",
+      "delta": 12,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_17",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0143",
+      "warehouseId": "wh_main",
+      "delta": 10,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_18",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0142",
+      "warehouseId": "wh_main",
+      "delta": 28,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_19",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0141",
+      "warehouseId": "wh_main",
+      "delta": 6,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_20",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0140",
+      "warehouseId": "wh_main",
+      "delta": 8,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_21",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0139",
+      "warehouseId": "wh_main",
+      "delta": -3,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_22",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0138",
+      "warehouseId": "wh_main",
+      "delta": 40,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_23",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0137",
+      "warehouseId": "wh_main",
+      "delta": 6,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_24",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0136",
+      "warehouseId": "wh_main",
+      "delta": 80,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_25",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0135",
+      "warehouseId": "wh_main",
+      "delta": 12,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_26",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0134",
+      "warehouseId": "wh_main",
+      "delta": 140,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_27",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0133",
+      "warehouseId": "wh_main",
+      "delta": 10,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_28",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0132",
+      "warehouseId": "wh_main",
+      "delta": 40.9,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_29",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0131",
+      "warehouseId": "wh_main",
+      "delta": 0.95,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_30",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0130",
+      "warehouseId": "wh_main",
+      "delta": 9,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_31",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0128",
+      "warehouseId": "wh_main",
+      "delta": 26,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_32",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0127",
+      "warehouseId": "wh_main",
+      "delta": 25,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_33",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0126",
+      "warehouseId": "wh_main",
+      "delta": 4,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_34",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-0125",
+      "warehouseId": "wh_main",
+      "delta": 4,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_35",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-3wj9scaj",
+      "warehouseId": "wh_main",
+      "delta": 0.55,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_36",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-m4mydstq",
+      "warehouseId": "wh_main",
+      "delta": -10.95,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_37",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-e6c8ovvu",
+      "warehouseId": "wh_main",
+      "delta": -11.95,
+      "reason": "Migration stock reconciliation"
+    },
+    {
+      "id": "adj_mig_38",
+      "date": "2026-07-07T14:59:06.291Z",
+      "productId": "PRD-ok07z9jn",
+      "warehouseId": "wh_main",
+      "delta": -100,
+      "reason": "Migration stock reconciliation"
+    }
+  ],
+  "company": {
+    "name": "El Hadj Cargo",
+    "address": "Blida, Algeria",
+    "phone": "+213 781713772",
+    "logoText": "E"
+  },
+  "counters": {
+    "bon": 50,
+    "purchase": 19,
+    "sale": 2,
+    "transfer": 1
+  }
+}
