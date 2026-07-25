@@ -14,7 +14,10 @@
         ".output",
         "dist-electron",
         ".cursor",
-        "warehouse-backup-*.json"
+        "warehouse-backup-*.json",
+        "bun.lock",
+        "scripts/fetch-build-log.mjs",
+        "scripts/build-meta.json"
       ]
     }
   ]
