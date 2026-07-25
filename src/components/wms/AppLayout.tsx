@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import { useWms } from "@/lib/wms/store";
 import { currentCashBalance } from "@/lib/wms/logic";
 import { formatDZD } from "@/lib/wms/logic";
+import { useAuth } from "@/lib/auth/AuthProvider";
 
 const nav: Array<{ group: string; items: Array<{ to: string; label: string }> }> = [
   {
@@ -35,6 +36,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (r) => r.location.pathname });
   const company = useWms((s) => s.company);
   const balance = useWms((s) => currentCashBalance(s));
+  const { user, skipAuth, signOut } = useAuth();
   const [dark, setDark] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -122,7 +124,9 @@ export function AppLayout({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="size-2 rounded-full bg-success animate-pulse" />
-              <span className="text-xs font-medium text-muted-foreground">Live System</span>
+              <span className="text-xs font-medium text-muted-foreground">
+                {skipAuth ? "Local desktop" : "Cloud sync"}
+              </span>
             </div>
             <button
               onClick={toggleTheme}
@@ -130,7 +134,20 @@ export function AppLayout({ children }: { children: ReactNode }) {
             >
               {dark ? "Light" : "Dark"}
             </button>
-            <div className="size-8 rounded-full bg-secondary outline-1 -outline-offset-1 outline-border" />
+            {!skipAuth && user && (
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-muted-foreground max-w-[140px] truncate" title={user.email ?? undefined}>
+                  {user.email}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => void signOut()}
+                  className="text-xs font-bold uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Sign out
+                </button>
+              </div>
+            )}
           </div>
         </header>
         <div className="flex-1">{children}</div>

@@ -6,6 +6,8 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
+  Navigate,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -13,6 +15,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AppLayout } from "../components/wms/AppLayout";
 import { StoreProvider } from "../lib/wms/StoreProvider";
+import { AuthProvider, useAuth } from "../lib/auth/AuthProvider";
 
 function NotFoundComponent() {
   return (
@@ -107,11 +110,38 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <StoreProvider>
-        <AppLayout>
-          <Outlet />
-        </AppLayout>
-      </StoreProvider>
+      <AuthProvider>
+        <StoreProvider>
+          <AuthGate />
+        </StoreProvider>
+      </AuthProvider>
     </QueryClientProvider>
+  );
+}
+
+function AuthGate() {
+  const { user, loading, skipAuth } = useAuth();
+  const pathname = useRouterState({ select: (r) => r.location.pathname });
+  const onLogin = pathname === "/login";
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-muted-foreground text-sm">
+        Checking account…
+      </div>
+    );
+  }
+
+  if (!skipAuth && !user) {
+    if (!onLogin) return <Navigate to="/login" />;
+    return <Outlet />;
+  }
+
+  if (onLogin) return <Navigate to="/" />;
+
+  return (
+    <AppLayout>
+      <Outlet />
+    </AppLayout>
   );
 }

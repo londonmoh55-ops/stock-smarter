@@ -1,0 +1,21 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "apphosting": [
+    {
+      "backendId": "stockflow",
+      "rootDir": "/",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        ".output",
+        "dist-electron",
+        ".cursor",
+        "warehouse-backup-*.json"
+      ]
+    }
+  ]
+}

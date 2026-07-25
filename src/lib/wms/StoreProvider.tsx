@@ -1,28 +1,61 @@
 import { useEffect, type ReactNode, useState } from "react";
-import { isStoreReady, waitForStore } from "./store";
+import { isStoreReady, setCloudUser, waitForStore } from "./store";
+import { useAuth } from "@/lib/auth/AuthProvider";
 
 /**
- * Hydrates disk state after mount. Shows a brief loading state in Electron
- * so saves don't overwrite disk data before hydration completes.
+ * Hydrates warehouse state after mount:
+ * - Electron → local disk via window.db
+ * - Web → Firestore for the signed-in user
  */
 export function StoreProvider({ children }: { children: ReactNode }) {
-  const [ready, setReady] = useState(() =>
-    typeof window === "undefined" || !window.db || isStoreReady(),
-  );
+  const { user, skipAuth, loading: authLoading } = useAuth();
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined" || !window.db) {
-      setReady(true);
-      return;
-    }
-    if (isStoreReady()) {
-      setReady(true);
-      return;
-    }
-    void waitForStore().then(() => setReady(true));
-  }, []);
+    if (typeof window === "undefined") return;
+    if (authLoading) return;
 
-  if (!ready) {
+    let cancelled = false;
+
+    async function hydrate() {
+      if (window.db) {
+        setCloudUser(null);
+        await waitForStore();
+        if (!cancelled) setReady(true);
+        return;
+      }
+
+      if (!user) {
+        setCloudUser(null);
+        if (!cancelled) setReady(false);
+        return;
+      }
+
+      setReady(false);
+      setCloudUser(user.uid);
+      await waitForStore();
+      if (!cancelled) setReady(true);
+    }
+
+    void hydrate();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, skipAuth, authLoading]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-muted-foreground text-sm">
+        Checking account…
+      </div>
+    );
+  }
+
+  if (!skipAuth && !user) {
+    return <>{children}</>;
+  }
+
+  if (!ready && !isStoreReady()) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background text-muted-foreground text-sm">
         Loading warehouse data…

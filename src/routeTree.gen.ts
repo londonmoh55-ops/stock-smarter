@@ -15,6 +15,7 @@ import { Route as SellRouteImport } from './routes/sell'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as PreArrivalRouteImport } from './routes/pre-arrival'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as ImportRouteImport } from './routes/import'
 import { Route as HistoryRouteImport } from './routes/history'
@@ -59,6 +60,11 @@ const ProductsRoute = ProductsRouteImport.update({
 const PreArrivalRoute = PreArrivalRouteImport.update({
   id: '/pre-arrival',
   path: '/pre-arrival',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InventoryRoute = InventoryRouteImport.update({
@@ -148,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/history': typeof HistoryRouteWithChildren
   '/import': typeof ImportRoute
   '/inventory': typeof InventoryRoute
+  '/login': typeof LoginRoute
   '/pre-arrival': typeof PreArrivalRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/reports': typeof ReportsRoute
@@ -171,6 +178,7 @@ export interface FileRoutesByTo {
   '/history': typeof HistoryRouteWithChildren
   '/import': typeof ImportRoute
   '/inventory': typeof InventoryRoute
+  '/login': typeof LoginRoute
   '/pre-arrival': typeof PreArrivalRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/reports': typeof ReportsRoute
@@ -195,6 +203,7 @@ export interface FileRoutesById {
   '/history': typeof HistoryRouteWithChildren
   '/import': typeof ImportRoute
   '/inventory': typeof InventoryRoute
+  '/login': typeof LoginRoute
   '/pre-arrival': typeof PreArrivalRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/reports': typeof ReportsRoute
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/import'
     | '/inventory'
+    | '/login'
     | '/pre-arrival'
     | '/products'
     | '/reports'
@@ -243,6 +253,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/import'
     | '/inventory'
+    | '/login'
     | '/pre-arrival'
     | '/products'
     | '/reports'
@@ -266,6 +277,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/import'
     | '/inventory'
+    | '/login'
     | '/pre-arrival'
     | '/products'
     | '/reports'
@@ -290,6 +302,7 @@ export interface RootRouteChildren {
   HistoryRoute: typeof HistoryRouteWithChildren
   ImportRoute: typeof ImportRoute
   InventoryRoute: typeof InventoryRoute
+  LoginRoute: typeof LoginRoute
   PreArrivalRoute: typeof PreArrivalRouteWithChildren
   ProductsRoute: typeof ProductsRouteWithChildren
   ReportsRoute: typeof ReportsRoute
@@ -340,6 +353,13 @@ declare module '@tanstack/react-router' {
       path: '/pre-arrival'
       fullPath: '/pre-arrival'
       preLoaderRoute: typeof PreArrivalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inventory': {
@@ -530,6 +550,7 @@ const rootRouteChildren: RootRouteChildren = {
   HistoryRoute: HistoryRouteWithChildren,
   ImportRoute: ImportRoute,
   InventoryRoute: InventoryRoute,
+  LoginRoute: LoginRoute,
   PreArrivalRoute: PreArrivalRouteWithChildren,
   ProductsRoute: ProductsRouteWithChildren,
   ReportsRoute: ReportsRoute,

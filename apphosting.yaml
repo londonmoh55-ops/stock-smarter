@@ -1,0 +1,34 @@
+# Firebase App Hosting — public web client config (safe to commit).
+# Used at BUILD so Vite can inline VITE_* into the client bundle.
+
+env:
+  - variable: VITE_FIREBASE_API_KEY
+    value: AIzaSyD2kF9a2lEmUoZfVDmH2jVtWPTaBbs88y8
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_AUTH_DOMAIN
+    value: aman-beta.firebaseapp.com
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_PROJECT_ID
+    value: aman-beta
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_STORAGE_BUCKET
+    value: aman-beta.firebasestorage.app
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_MESSAGING_SENDER_ID
+    value: "862704684226"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: VITE_FIREBASE_APP_ID
+    value: 1:862704684226:web:84771b8a8619e4447f7f5b
+    availability:
+      - BUILD
+      - RUNTIME

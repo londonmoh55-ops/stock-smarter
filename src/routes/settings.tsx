@@ -99,8 +99,8 @@ function SettingsPage() {
       <PageHeader title="Settings" subtitle="Business rules, company profile, and backups." />
 
       {!isElectron && (
-        <div className="mb-6 rounded-xl border border-warning/40 bg-warning/10 px-4 py-3 text-sm text-warning-foreground">
-          Browser mode: data stays in memory only and is lost on refresh. Use the desktop app for real work.
+        <div className="mb-6 rounded-xl border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-foreground">
+          Cloud mode: warehouse data syncs to Firestore for your signed-in account.
         </div>
       )}
 
@@ -112,7 +112,7 @@ function SettingsPage() {
           <dt className="text-muted-foreground">Schema</dt>
           <dd>v4 (pre-arrival + business settings)</dd>
           <dt className="text-muted-foreground">Runtime</dt>
-          <dd>{isElectron ? "Desktop (Electron) — data saved to disk" : "Browser (dev only — not persisted)"}</dd>
+          <dd>{isElectron ? "Desktop (Electron) — data saved to disk" : "Browser — synced to Firestore"}</dd>
           <dt className="text-muted-foreground">Products</dt>
           <dd>{state.products.filter((p) => !p.archived).length} active</dd>
           <dt className="text-muted-foreground">Customer stock rows</dt>
