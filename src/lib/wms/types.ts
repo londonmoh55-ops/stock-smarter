@@ -66,11 +66,9 @@ export interface CargoBon {
   notes?: string;
 }
 
-export type PreArrivalStatus =
-  | "waiting_arrival"
-  | "partially_received"
-  | "completed"
-  | "cancelled";
+export type PreArrivalStatus = "waiting_arrival" | "partially_received" | "completed" | "cancelled";
+
+export type ArrivalPaymentStatus = "done" | "still_owed" | "missing";
 
 export type ChargeType = "piece" | "weight";
 
@@ -111,6 +109,10 @@ export interface PreArrivalBon {
   /** Set when arrival confirmed */
   verifiedAt?: string;
   verifiedBy?: string;
+  /** Staff payment choice on confirm: paid now / balance owed / missing deduction */
+  arrivalPaymentStatus?: ArrivalPaymentStatus;
+  /** Amount staff paid the passenger (DZD) — set on draft/confirm */
+  arrivalPaidAmount?: number;
 }
 
 export type ArrivalLineStatus = "ok" | "missing" | "partial";
@@ -145,6 +147,9 @@ export interface ArrivalVerification {
   expectedValue: number;
   receivedValue: number;
   missingValue: number;
+  /** What was paid to the passenger on confirm (DZD) */
+  paidAmount?: number;
+  paymentStatus?: ArrivalPaymentStatus;
   items: ArrivalItemSnapshot[];
 }
 
@@ -176,12 +181,7 @@ export interface CustomerStock {
   qtyOut: number;
 }
 
-export type CustomerLedgerType =
-  | "charge"
-  | "payment"
-  | "trade_adjustment"
-  | "credit"
-  | "debit";
+export type CustomerLedgerType = "charge" | "payment" | "trade_adjustment" | "credit" | "debit";
 
 export interface CustomerLedgerEntry {
   id: string;
@@ -194,10 +194,7 @@ export interface CustomerLedgerEntry {
 }
 
 export type TransporterLedgerType =
-  | "payout_earned"
-  | "compensation_owed"
-  | "payment_made"
-  | "adjustment";
+  "payout_earned" | "compensation_owed" | "payment_made" | "adjustment";
 
 export interface TransporterLedgerEntry {
   id: string;
@@ -210,11 +207,7 @@ export interface TransporterLedgerEntry {
 }
 
 export type CashDirection = "in" | "out";
-export type CashCategory =
-  | "customer_payment"
-  | "transporter_payout"
-  | "expense"
-  | "other";
+export type CashCategory = "customer_payment" | "transporter_payout" | "expense" | "other";
 
 export type PaymentMethod = "cash" | "ccp" | "bank";
 
@@ -301,6 +294,38 @@ export interface SaleRecord {
   voidReason?: string;
 }
 
+/** Manual daily log: customer walk-out or passenger visit (Excel-like sheet). */
+export type PickupLogSituation = "ok" | "missing" | "forgot";
+export type PickupLogPayStatus = "paid" | "pending";
+export type DailyLogKind = "customer" | "passenger";
+
+export interface DailyLogLine {
+  productName: string;
+  productId?: string;
+  /** Customer: walked out with; Passenger: brought in */
+  pickedQty: number;
+  missingQty: number;
+}
+
+export interface DailyPickupLogEntry {
+  id: string;
+  kind: DailyLogKind;
+  /** YYYY-MM-DD */
+  date: string;
+  /** Customer or passenger/transporter name */
+  partyName: string;
+  partyId?: string;
+  lines: DailyLogLine[];
+  paymentAmount: number;
+  payStatus: PickupLogPayStatus;
+  situation: PickupLogSituation;
+  enteredBy: string;
+  notes: string;
+  createdAt: string;
+  /** Linked cash tx when Paid (customer in / passenger out) */
+  relatedCashTxId?: string;
+}
+
 export interface WmsState {
   products: Product[];
   customers: Customer[];
@@ -317,6 +342,8 @@ export interface WmsState {
   cashTransactions: CashTransaction[];
   bonExceptions: BonException[];
   sales: SaleRecord[];
+  /** Manual daily log: customer walk-outs + passenger visits (safe-linked when Paid) */
+  dailyPickupLogs: DailyPickupLogEntry[];
   company: CompanyInfo;
   settings: BusinessSettings;
   counters: {

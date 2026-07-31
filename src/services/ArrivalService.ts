@@ -1,9 +1,10 @@
 import type {
   ArrivalItemSnapshot,
   ArrivalLineStatus,
+  ArrivalPaymentStatus,
   ArrivalVerification,
+  BonException,
   BonLineItem,
-  CargoBon,
   CashTransaction,
   PreArrivalBon,
   PreArrivalItem,
@@ -12,10 +13,9 @@ import type {
   WmsState,
 } from "@/lib/wms/types";
 import {
-  buildReconciliationEntries,
   todayStr,
-  transporterNetFromBon,
   upsertCustomerStock,
+  shortfallQty,
 } from "@/lib/wms/cargo-logic";
 import { assertCashDayOpen, getSettings } from "@/lib/wms/businessSettings";
 
@@ -39,7 +39,7 @@ export function lineReceivedTotal(
   return Math.round(receivedQty * price);
 }
 
-/** Shortfall units (pcs or kg) for missing-value / compensation. */
+/** Shortfall units (pcs or kg) for line status — not used for money. */
 export function arrivalShortfall(
   chargeType: "piece" | "weight",
   expectedQty: number,
@@ -53,13 +53,18 @@ export function arrivalShortfall(
   return Math.max(0, expectedQty - receivedQty);
 }
 
+/**
+ * Line snapshot for arrival UI / verification.
+ * `missingValue` is always 0 — money deduction is bon-level and manual.
+ */
 export function buildArrivalSnapshot(
   item: PreArrivalItem,
   receivedQty: number,
   receivedWeight: number | null,
-  /** Product catalog declared value (product value), default 0 */
-  declaredValue = 0,
-  includeDeclaredValue = true,
+  /** @deprecated unused — kept for call-site compatibility */
+  _declaredValue = 0,
+  /** @deprecated unused — kept for call-site compatibility */
+  _includeDeclaredValue = true,
 ): ArrivalItemSnapshot {
   const qtyDifference = receivedQty - item.expectedQty;
   const weightDifference =
@@ -80,11 +85,9 @@ export function buildArrivalSnapshot(
     item.expectedWeight,
     receivedWeight,
   );
-  const unitComp = item.price + (includeDeclaredValue ? declaredValue : 0);
-  const missingValue = Math.round(shortfall * unitComp);
   let lineStatus: ArrivalLineStatus = "ok";
-  if (missingValue > 0) {
-    lineStatus = receivedTotal <= 0 && shortfall > 0 ? "missing" : "partial";
+  if (shortfall > 0) {
+    lineStatus = receivedTotal <= 0 ? "missing" : "partial";
   }
   return {
     id: uid(),
@@ -104,12 +107,8 @@ export function buildArrivalSnapshot(
     lineStatus,
     expectedTotal,
     receivedTotal,
-    missingValue,
+    missingValue: 0,
   };
-}
-
-function declaredForProduct(state: WmsState, productId: string): number {
-  return state.products.find((p) => p.id === productId)?.declaredValue ?? 0;
 }
 
 /** Persist draft received values without touching inventory. */
@@ -117,13 +116,13 @@ export function saveArrivalDraft(
   state: WmsState,
   bonId: string,
   lines: ReceivedLineInput[],
+  amountPaidToPassenger = 0,
 ): WmsState {
   const bon = state.preArrivalBons.find((b) => b.id === bonId);
   if (!bon) throw new Error("Bon not found");
   if (bon.status === "completed" || bon.status === "cancelled") {
     throw new Error("Bon is not open for verification");
   }
-  const includeDeclared = getSettings(state).shortageIncludeDeclaredValue;
   const byId = new Map(lines.map((l) => [l.itemId, l]));
   const items = bon.items.map((it) => {
     const r = byId.get(it.id);
@@ -135,21 +134,16 @@ export function saveArrivalDraft(
     };
   });
   const snapshots = items.map((it) =>
-    buildArrivalSnapshot(
-      it,
-      it.receivedQty ?? 0,
-      it.receivedWeight ?? null,
-      declaredForProduct(state, it.productId),
-      includeDeclared,
-    ),
+    buildArrivalSnapshot(it, it.receivedQty ?? 0, it.receivedWeight ?? null),
   );
   const receivedValue = snapshots.reduce((a, s) => a + s.receivedTotal, 0);
-  const missingValue = snapshots.reduce((a, s) => a + s.missingValue, 0);
+  const paid = Math.max(0, Math.round(amountPaidToPassenger));
   const updated: PreArrivalBon = {
     ...bon,
     items,
     receivedValue,
-    missingValue,
+    arrivalPaidAmount: paid,
+    missingValue: Math.max(0, Math.round(receivedValue) - paid),
     status: "partially_received",
   };
   return {
@@ -158,15 +152,29 @@ export function saveArrivalDraft(
   };
 }
 
+export type ConfirmArrivalOptions = {
+  reason?: string;
+  user?: string;
+  /**
+   * Amount you pay the passenger (DZD).
+   * When paymentStatus is "done", this amount leaves the safe.
+   */
+  amountPaidToPassenger?: number;
+  /** @deprecated use amountPaidToPassenger — treated as earned − paid when paid omitted */
+  manualMissingValue?: number;
+  /** Done = pay now; still_owed = ledger pending; missing = no cash out */
+  paymentStatus?: ArrivalPaymentStatus;
+};
+
 /**
  * Confirm arrival — inventory increases ONLY by received quantities.
- * Writes shortage history forever. Finalizes bon as completed.
+ * You type how much you paid the passenger; Done posts that to cash out.
  */
 export function confirmArrival(
   state: WmsState,
   bonId: string,
   lines: ReceivedLineInput[],
-  options?: { reason?: string; user?: string },
+  options?: ConfirmArrivalOptions,
 ): { state: WmsState; verification: ArrivalVerification } {
   const bon = state.preArrivalBons.find((b) => b.id === bonId);
   if (!bon) throw new Error("Bon not found");
@@ -174,30 +182,41 @@ export function confirmArrival(
   if (bon.status === "cancelled") throw new Error("Bon is cancelled");
 
   const settings = getSettings(state);
-  const includeDeclared = settings.shortageIncludeDeclaredValue;
   const user = options?.user ?? "warehouse";
   const reason = options?.reason ?? "Shortage on arrival";
   const now = new Date().toISOString();
   const cashDate = todayStr();
   const byId = new Map(lines.map((l) => [l.itemId, l]));
 
+  const paymentStatus: ArrivalPaymentStatus =
+    options?.paymentStatus ??
+    (settings.transporterPayoutMode === "immediate" ? "done" : "still_owed");
+
   const snapshots: ArrivalItemSnapshot[] = bon.items.map((it) => {
     const r = byId.get(it.id);
     const receivedQty = r?.receivedQty ?? it.receivedQty ?? 0;
     const receivedWeight =
       it.chargeType === "weight" ? (r?.receivedWeight ?? it.receivedWeight ?? 0) : null;
-    return buildArrivalSnapshot(
-      it,
-      receivedQty,
-      receivedWeight,
-      declaredForProduct(state, it.productId),
-      includeDeclared,
-    );
+    return buildArrivalSnapshot(it, receivedQty, receivedWeight);
   });
 
   const expectedValue = bon.expectedValue;
-  const receivedValue = snapshots.reduce((a, s) => a + s.receivedTotal, 0);
-  const missingValue = snapshots.reduce((a, s) => a + s.missingValue, 0);
+  const receivedValue = Math.round(snapshots.reduce((a, s) => a + s.receivedTotal, 0));
+  const payoutEarned = receivedValue;
+
+  let amountPaid: number;
+  if (options?.amountPaidToPassenger != null) {
+    amountPaid = Math.max(0, Math.round(options.amountPaidToPassenger));
+  } else if (options?.manualMissingValue != null) {
+    // Legacy: missing deduction → paid = earned − missing
+    amountPaid = Math.max(0, payoutEarned - Math.max(0, Math.round(options.manualMissingValue)));
+  } else if (paymentStatus === "done") {
+    amountPaid = payoutEarned;
+  } else {
+    amountPaid = Math.max(0, Math.round(bon.arrivalPaidAmount ?? 0));
+  }
+
+  const missingValue = Math.max(0, payoutEarned - amountPaid);
 
   const verification: ArrivalVerification = {
     id: uid(),
@@ -208,12 +227,14 @@ export function confirmArrival(
     expectedValue,
     receivedValue,
     missingValue,
+    paidAmount: amountPaid,
+    paymentStatus,
     items: snapshots,
   };
 
   const shortageHistory: ShortageHistoryEntry[] = [...state.shortageHistory];
   for (const snap of snapshots) {
-    if (snap.missingValue > 0 || snap.qtyDifference < 0 || (snap.weightDifference ?? 0) < 0) {
+    if (snap.qtyDifference < 0 || (snap.weightDifference ?? 0) < 0) {
       shortageHistory.push({
         id: uid(),
         bonId: bon.id,
@@ -229,7 +250,7 @@ export function confirmArrival(
         expectedWeight: snap.expectedWeight,
         receivedWeight: snap.receivedWeight,
         weightDifference: snap.weightDifference,
-        missingValue: snap.missingValue,
+        missingValue: 0,
         user,
         date: now,
         reason,
@@ -237,7 +258,6 @@ export function confirmArrival(
     }
   }
 
-  // Map to CargoBon line items for reconciliation helpers (not persisted)
   const lineItems: BonLineItem[] = snapshots.map((snap) => {
     const stockQty =
       snap.chargeType === "weight" ? (snap.receivedWeight ?? 0) : snap.receivedQty;
@@ -246,7 +266,6 @@ export function confirmArrival(
     let condition: BonLineItem["condition"] = "good";
     if (stockQty <= 0 && expectedStockQty > 0) condition = "missing";
     else if (stockQty < expectedStockQty) condition = "damaged";
-    const productDeclared = declaredForProduct(state, snap.productId);
     return {
       id: snap.preArrivalItemId,
       customerId: snap.customerId,
@@ -255,44 +274,60 @@ export function confirmArrival(
       expectedQty: expectedStockQty,
       buyRate: snap.price,
       sellRate: snap.price,
-      declaredValue: productDeclared,
+      declaredValue: 0,
       receivedQty: stockQty,
       condition,
     };
   });
 
-  const cargoBon: CargoBon = {
-    id: bon.id,
-    bonReference: bon.invoice,
-    transporterId: bon.transporterId,
-    dateCreated: bon.shipmentDate,
-    status: "reconciled",
-    attachedPhoto: bon.attachedPhoto,
-    lineItems,
-    notes: bon.notes,
-  };
+  const stockUpdates: Array<{ customerId: string; productId: string; qty: number }> = [];
+  const exceptions: BonException[] = [];
+  for (const line of lineItems) {
+    if (line.receivedQty > 0 && (line.condition === "good" || line.condition === "damaged")) {
+      stockUpdates.push({
+        customerId: line.customerId,
+        productId: line.productId,
+        qty: line.receivedQty,
+      });
+    }
+    const sf = shortfallQty(line);
+    if (sf > 0) {
+      exceptions.push({
+        id: uid(),
+        bonId: bon.id,
+        lineItemId: line.id,
+        customerId: line.customerId,
+        productId: line.productId,
+        shortfallQty: sf,
+        compensationAmount: 0,
+        resolved: false,
+        customerCredited: false,
+      });
+    }
+  }
 
-  const { transporterEntries, stockUpdates, exceptions } = buildReconciliationEntries(
-    cargoBon,
-    bon.transporterId,
-    now,
-    uid,
-    includeDeclared,
-  );
+  const settledTransporterEntries: TransporterLedgerEntry[] = [];
+  if (payoutEarned > 0) {
+    settledTransporterEntries.push({
+      id: uid(),
+      transporterId: bon.transporterId,
+      date: now,
+      type: "payout_earned",
+      amount: payoutEarned,
+      description: `Delivery payout — Bon ${bon.invoice}`,
+      relatedBonId: bon.id,
+    });
+  }
 
-  const { net } = transporterNetFromBon(lineItems, includeDeclared);
-  const payoutAmount = Math.round(net);
   const cashTransactions: CashTransaction[] = [...state.cashTransactions];
-  const settledTransporterEntries: TransporterLedgerEntry[] = [...transporterEntries];
-
-  if (payoutAmount > 0 && settings.transporterPayoutMode === "immediate") {
+  if (paymentStatus === "done" && amountPaid > 0) {
     assertCashDayOpen(state, cashDate);
     cashTransactions.push({
       id: uid(),
       date: cashDate,
       direction: "out",
       category: "transporter_payout",
-      amount: payoutAmount,
+      amount: amountPaid,
       relatedTransporterId: bon.transporterId,
       paymentMethod: "cash",
       description: `Arrival payout — ${bon.invoice} (${bon.transporterName})`,
@@ -302,7 +337,7 @@ export function confirmArrival(
       transporterId: bon.transporterId,
       date: now,
       type: "payment_made",
-      amount: -payoutAmount,
+      amount: -amountPaid,
       description: `Cash payout on arrival — ${bon.invoice}`,
       relatedBonId: bon.id,
     });
@@ -328,8 +363,10 @@ export function confirmArrival(
     status: "completed",
     receivedValue,
     missingValue,
+    arrivalPaidAmount: amountPaid,
     verifiedAt: now,
     verifiedBy: user,
+    arrivalPaymentStatus: paymentStatus,
   };
 
   return {
@@ -342,7 +379,6 @@ export function confirmArrival(
       transporterLedger: [...state.transporterLedger, ...settledTransporterEntries],
       cashTransactions,
       bonExceptions: [...state.bonExceptions, ...exceptions],
-      // cargoBons unchanged — legacy backups only; live UI uses preArrivalBons
     },
     verification,
   };

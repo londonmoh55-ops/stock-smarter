@@ -24,13 +24,12 @@ const item: PreArrivalItem = {
 
 const snapOk = buildArrivalSnapshot(item, 8, null, 2000);
 assert.equal(snapOk.qtyDifference, 0);
-assert.equal(snapOk.missingValue, 0);
+assert.equal(snapOk.missingValue, 0, "line missing money is never auto-calculated");
 assert.equal(snapOk.lineStatus, "ok");
 
-// 1 missing: delivery 500 + declared 2000 = 2500
 const snapShort = buildArrivalSnapshot(item, 7, null, 2000);
 assert.equal(snapShort.qtyDifference, -1);
-assert.equal(snapShort.missingValue, 2500);
+assert.equal(snapShort.missingValue, 0, "qty shortfall does not invent money");
 assert.equal(snapShort.lineStatus, "partial");
 
 const partialLine: BonLineItem = {
@@ -47,7 +46,7 @@ const partialLine: BonLineItem = {
 };
 const net = transporterNetFromBon([partialLine]);
 assert.equal(net.payoutEarned, 3500, "pay delivery for 7 received");
-assert.equal(net.compensationOwed, 2500, "1 × (500 delivery + 2000 declared)");
+assert.equal(net.compensationOwed, 2500, "legacy helper still uses shortfall×unit");
 assert.equal(net.net, 1000);
 
 let state: WmsState = buildSeed();
@@ -74,7 +73,6 @@ assert.equal(state.preArrivalBons.length, 1);
 assert.equal(state.preArrivalBons[0].status, "waiting_arrival");
 assert.equal(state.customerStock.length, 0, "pre-arrival must not touch stock");
 
-// Set catalog declared value (auto-created product starts with declaredValue = price)
 const productId = state.preArrivalBons[0].items[0].productId;
 state = {
   ...state,
@@ -85,20 +83,25 @@ state = {
 
 const lines = fillReceivedAsExpected(state.preArrivalBons[0]);
 lines[0] = { ...lines[0], receivedQty: 7 };
-const confirmed = confirmArrival(state, state.preArrivalBons[0].id, lines);
+const confirmed = confirmArrival(state, state.preArrivalBons[0].id, lines, {
+  amountPaidToPassenger: 1000,
+  paymentStatus: "done",
+});
 state = confirmed.state;
 assert.equal(state.preArrivalBons[0].status, "completed");
+assert.equal(state.preArrivalBons[0].arrivalPaidAmount, 1000, "paid amount stored on bon");
+assert.equal(state.preArrivalBons[0].missingValue, 2500, "unpaid remainder = earned − paid");
+assert.equal(state.preArrivalBons[0].arrivalPaymentStatus, "done");
 assert.equal(state.customerStock[0]?.qtyIn, 7, "stock = received only");
 assert.ok(state.shortageHistory.length >= 1);
-assert.equal(state.shortageHistory[0].missingValue, 2500);
+assert.equal(state.shortageHistory[0].missingValue, 0, "line shortage has no auto money");
 assert.equal(confirmed.verification.missingValue, 2500);
+assert.equal(confirmed.verification.paidAmount, 1000);
 
 const payout = state.transporterLedger.find((e) => e.type === "payout_earned");
-const comp = state.transporterLedger.find((e) => e.type === "compensation_owed");
 const payment = state.transporterLedger.find((e) => e.type === "payment_made");
 assert.equal(payout?.amount, 3500);
-assert.equal(comp?.amount, -2500);
-assert.equal(payment?.amount, -1000, "net settled in cash on confirm");
+assert.equal(payment?.amount, -1000, "cash paid amount on confirm");
 
 const cashOut = state.cashTransactions.find(
   (t) => t.direction === "out" && t.category === "transporter_payout",

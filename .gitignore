@@ -43,3 +43,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local Odoo (do not deploy)
+odoo_addons/

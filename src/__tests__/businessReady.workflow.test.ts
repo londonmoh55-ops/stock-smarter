@@ -39,9 +39,10 @@ const itemBase = {
   expectedTotal: 4000,
 };
 const withDeclared = buildArrivalSnapshot(itemBase, 7, null, 2000, true);
-assert.equal(withDeclared.missingValue, 2500);
+assert.equal(withDeclared.missingValue, 0);
+assert.equal(withDeclared.lineStatus, "partial");
 const withoutDeclared = buildArrivalSnapshot(itemBase, 7, null, 2000, false);
-assert.equal(withoutDeclared.missingValue, 500);
+assert.equal(withoutDeclared.missingValue, 0);
 
 const line: BonLineItem = {
   id: "l1",
@@ -88,18 +89,21 @@ state = {
 };
 
 const lines = fillReceivedAsExpected(state.preArrivalBons[0]);
-const confirmed = confirmArrival(state, state.preArrivalBons[0].id, lines);
+const confirmed = confirmArrival(state, state.preArrivalBons[0].id, lines, {
+  manualMissingValue: 0,
+  paymentStatus: "done",
+});
 state = confirmed.state;
 assert.equal(state.preArrivalBons[0].status, "completed");
 assert.ok(state.customerStock.some((r) => r.qtyIn === 4));
 assert.ok(
   state.cashTransactions.some((t) => t.direction === "out" && t.category === "transporter_payout"),
-  "immediate mode posts cash out",
+  "done status posts cash out",
 );
 assert.equal(transporterBalance(state, state.preArrivalBons[0].transporterId), 0, "settled on arrival");
 assert.equal(state.cargoBons.length, 0, "no longer writes cargoBons");
 
-// ledger_only: no cash out
+// still_owed: no cash out
 state = {
   ...state,
   settings: { ...getSettings(state), transporterPayoutMode: "ledger_only" },
@@ -126,12 +130,15 @@ state = saved2.state;
 const bon2 = state.preArrivalBons.find((b) => b.invoice === "90002")!;
 assert.ok(bon2, "second pre-arrival saved");
 const cashBefore = state.cashTransactions.filter((t) => t.direction === "out").length;
-const conf2 = confirmArrival(state, bon2.id, fillReceivedAsExpected(bon2));
+const conf2 = confirmArrival(state, bon2.id, fillReceivedAsExpected(bon2), {
+  paymentStatus: "still_owed",
+  manualMissingValue: 0,
+});
 state = conf2.state;
 assert.equal(
   state.cashTransactions.filter((t) => t.direction === "out").length,
   cashBefore,
-  "ledger_only does not cash out",
+  "still_owed does not cash out",
 );
 assert.ok(transporterBalance(state, bon2.transporterId) > 0);
 
