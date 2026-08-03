@@ -11,16 +11,32 @@ service firebase.storage {
         && request.auth.token.email.lower() == 'londonmoh55@gmail.com';
     }
 
-    function isImage() {
+    function isJsonBackup() {
       return request.resource != null
-        && request.resource.contentType.matches('image/.*')
-        && request.resource.size < 15 * 1024 * 1024;
+        && request.resource.contentType == 'application/json'
+        && request.resource.size < 20 * 1024 * 1024;
     }
 
+    // Signed-in staff (same trust as Firestore). Size cap only —
+    // WhatsApp / phone files often send odd or empty contentType.
     match /warehouse/photos/{allPaths=**} {
       allow read: if signedIn();
-      allow create, update: if signedIn() && isImage();
+      allow create, update: if signedIn()
+        && request.resource.size < 15 * 1024 * 1024;
       allow delete: if signedIn() && (isAdmin() || request.auth.uid == resource.metadata.uploadedBy);
+    }
+
+    match /warehouse/backups/{allPaths=**} {
+      allow read: if signedIn();
+      allow create, update: if signedIn() && isJsonBackup();
+      allow delete: if isAdmin();
+    }
+
+    // Live warehouse state blob (replaces Firestore document `data`)
+    match /warehouse/state/{allPaths=**} {
+      allow read: if signedIn();
+      allow create, update: if signedIn() && isJsonBackup();
+      allow delete: if isAdmin();
     }
   }
 }
