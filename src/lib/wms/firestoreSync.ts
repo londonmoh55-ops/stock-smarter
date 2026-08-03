@@ -196,13 +196,22 @@ export type SaveWarehouseResult = {
 
 /**
  * Persist warehouse state: Storage blob + tiny Firestore revision pointer.
+ * @param expectedRevision — omit to read current revision first (legacy one-arg callers)
  */
 export async function saveWarehouseState(
   state: WmsState,
-  expectedRevision: number,
+  expectedRevision?: number,
   expectedUpdatedAtMs: number = 0,
 ): Promise<SaveWarehouseResult> {
-  const nextRevision = expectedRevision + 1;
+  let baseRevision = expectedRevision;
+  let baseUpdatedAtMs = expectedUpdatedAtMs;
+  if (baseRevision === undefined) {
+    const current = await loadWarehouseSnapshot();
+    baseRevision = current?.revision ?? 0;
+    baseUpdatedAtMs = current?.updatedAtMs ?? 0;
+  }
+
+  const nextRevision = baseRevision + 1;
   const writeStartedAt = Date.now();
 
   // Upload blob first so a successful revision always has Storage content.
@@ -218,7 +227,7 @@ export async function saveWarehouseState(
         ? parseMeta(snap.data() as Record<string, unknown>)
         : { revision: 0, updatedAtMs: 0, legacyData: null };
 
-      if (current.revision !== expectedRevision || current.updatedAtMs > expectedUpdatedAtMs) {
+      if (current.revision !== baseRevision || current.updatedAtMs > baseUpdatedAtMs) {
         // Load full remote for the error payload (best-effort).
         staleRemote = {
           state: null,
@@ -254,7 +263,7 @@ export async function saveWarehouseState(
 
   return {
     revision: nextRevision,
-    updatedAtMs: Math.max(expectedUpdatedAtMs, writeStartedAt),
+    updatedAtMs: Math.max(baseUpdatedAtMs, writeStartedAt),
   };
 }
 
